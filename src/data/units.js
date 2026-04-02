@@ -396,17 +396,19 @@ export const units = [
       {
         id: 'concept1',
         title: '俗名與學名',
-        interactionType: 'clickExplore',
+        interactionType: 'matchingPairs',
         content: {
-          title: '生物的名字怎麼取？',
-          instruction: '點擊每個例子，看看俗名和學名有什麼不同！',
-          sceneEmoji: '📛',
-          items: [
-            { id: 'cat', emoji: '🐱', label: '貓', info: { title: '貓的名字', description: '貓在台灣叫「貓」，英文叫 Cat，日文叫 ネコ。每個地方都不一樣！但全世界科學家都用同一個學名：Felis catus。學名就像生物的「身分證號碼」，不管你在哪個國家，都能找到同一種生物。', category: '俗名 vs 學名', categoryColor: 'blue' }},
-            { id: 'sweet_potato', emoji: '🍠', label: '番薯', info: { title: '番薯的混亂', description: '番薯在不同地方有不同叫法：番薯、地瓜、甘薯⋯都是同一種東西！這就是俗名的缺點——容易搞混。科學家給它一個學名 Ipomoea batatas，全世界都知道在說哪一種植物。', category: '同物異名', categoryColor: 'orange' }},
-            { id: 'mouse', emoji: '🐭', label: '老鼠', info: { title: '「老鼠」太多種了！', description: '你說「老鼠」，到底是哪一種？溝鼠？田鼠？倉鼠？「老鼠」這個俗名涵蓋了好幾十種不同的動物。有了學名，科學家才能精準指定是哪一種。', category: '一名多物', categoryColor: 'red' }},
-            { id: 'why', emoji: '🤔', label: '為什麼需要學名？', info: { title: '學名的重要性', description: '想像你在網路上查一種生物的資料，全世界每個國家都用自己的語言叫它不同名字，你根本搜不到！有了統一的學名，全世界的科學家就能用同一種語言溝通，不會再搞混了。', category: '核心概念', categoryColor: 'teal' }},
-            { id: 'linnaeus', emoji: '👨‍🔬', label: '林奈', info: { title: '分類學之父——林奈', description: '瑞典科學家林奈發明了「二名法」，用兩個拉丁文單字幫生物取學名。第一個字是「屬名」（就像你的姓），第二個字是「種小名」（就像你的名字）。例如人類叫 Homo sapiens。', category: '知識補充', categoryColor: 'purple' }},
+          title: '配對俗名和學名',
+          instruction: '把左邊的俗名拖到右邊對應的學名！',
+          leftLabel: '俗名',
+          rightLabel: '學名',
+          pairs: [
+            { id: 'p1', left: { text: '貓', emoji: '🐱' }, right: { text: 'Felis catus', emoji: '🏷️' }, explanation: '家貓的學名是 Felis catus，Felis 是屬名，catus 是種小名' },
+            { id: 'p2', left: { text: '人類', emoji: '🧑' }, right: { text: 'Homo sapiens', emoji: '🏷️' }, explanation: '人類的學名是 Homo sapiens，意思是「聰明的人」' },
+            { id: 'p3', left: { text: '狗', emoji: '🐕' }, right: { text: 'Canis familiaris', emoji: '🏷️' }, explanation: '家犬的學名是 Canis familiaris，跟狼（Canis lupus）同屬' },
+            { id: 'p4', left: { text: '水稻', emoji: '🌾' }, right: { text: 'Oryza sativa', emoji: '🏷️' }, explanation: '水稻的學名是 Oryza sativa，全世界一半以上的人以它為主食' },
+            { id: 'p5', left: { text: '番薯', emoji: '🍠' }, right: { text: 'Ipomoea batatas', emoji: '🏷️' }, explanation: '番薯（地瓜）的學名是 Ipomoea batatas，俗名在各地不同但學名統一' },
+            { id: 'p6', left: { text: '獅子', emoji: '🦁' }, right: { text: 'Panthera leo', emoji: '🏷️' }, explanation: '獅子的學名是 Panthera leo，跟老虎（Panthera tigris）同屬' },
           ]
         },
         quiz: {
@@ -449,18 +451,21 @@ export const units = [
       {
         id: 'concept3',
         title: '分類的七個階層',
-        interactionType: 'stepProcess',
+        interactionType: 'sequenceOrder',
         content: {
-          title: '生物分類的七個層級',
-          steps: [
-            { emoji: '🌍', visual: '界', title: '界（最大）', description: '「界」是最大的分類，就像把所有生物分成幾個超大的家族。目前分成五界：原核生物界、原生生物界、真菌界、植物界、動物界。', actionText: '下一層', resultText: '界：最大的分類單位' },
-            { emoji: '🚪', visual: '門', title: '門', description: '同一界裡面再細分成幾個「門」。例如動物界裡有脊索動物門（有脊椎的）和節肢動物門（有外骨骼的，像昆蟲和螃蟹）。', actionText: '下一層', resultText: '門：把同一界的生物再分組' },
-            { emoji: '📊', visual: '綱', title: '綱', description: '同一門再分成幾個「綱」。例如脊索動物門裡有哺乳綱（哺乳動物）、鳥綱（鳥類）、爬蟲綱（蜥蜴、蛇）等等。', actionText: '下一層', resultText: '綱：繼續細分' },
-            { emoji: '📁', visual: '目', title: '目', description: '哺乳綱裡面又分成很多「目」，例如食肉目（獅子、老虎、貓）、靈長目（人、猴子）。你和猴子都是靈長目的喔！', actionText: '下一層', resultText: '目：更細的分類' },
-            { emoji: '👨‍👩‍👧‍👦', visual: '科', title: '科', description: '食肉目裡面又分成貓科（獅子、老虎、貓）、犬科（狗、狐狸、狼）。同一科的生物長得更像了。', actionText: '下一層', resultText: '科：同科生物很相似' },
-            { emoji: '🏷️', visual: '屬', title: '屬', description: '貓科裡面又分成豹屬（獅子、老虎）和貓屬（家貓、野貓）。屬名就是學名的第一個字！', actionText: '下一層', resultText: '屬：學名的第一個字' },
-            { emoji: '🎯', visual: '種', title: '種（最小）', description: '「種」是最小的分類單位。同一種的生物可以互相交配生出有生殖能力的後代。例如家貓就是一個種：Felis catus。', actionText: '完成！', resultText: '種：最小的分類單位，記住口訣：界門綱目科屬種！' },
-          ]
+          title: '排出正確的分類階層',
+          instruction: '把分類階層從大到小排列！',
+          description: '生物分類有七個層級，從最大的「界」到最小的「種」，你能排出正確的順序嗎？',
+          items: [
+            { id: 's1', text: '界', emoji: '🌍', detail: '最大的分類單位，如動物界、植物界' },
+            { id: 's2', text: '門', emoji: '🚪', detail: '如脊索動物門、節肢動物門' },
+            { id: 's3', text: '綱', emoji: '📊', detail: '如哺乳綱、鳥綱、爬蟲綱' },
+            { id: 's4', text: '目', emoji: '📁', detail: '如食肉目、靈長目' },
+            { id: 's5', text: '科', emoji: '👨‍👩‍👧‍👦', detail: '如貓科、犬科' },
+            { id: 's6', text: '屬', emoji: '🏷️', detail: '學名的第一個字，如貓屬' },
+            { id: 's7', text: '種', emoji: '🎯', detail: '最小的分類單位，如家貓' },
+          ],
+          completionMessage: '太棒了！記住口訣：「界門綱目科屬種」！越往下分類越細，同一組的生物也越相似。'
         },
         quiz: {
           question: '生物分類的七個階層，由大到小的正確順序為？',
@@ -477,17 +482,28 @@ export const units = [
       {
         id: 'concept4',
         title: '五界分類',
-        interactionType: 'clickExplore',
+        interactionType: 'categorySort',
         content: {
-          title: '生物的五大王國',
-          instruction: '點擊每個界，認識它的成員！',
-          sceneEmoji: '🌍',
+          title: '把生物分到正確的界！',
+          instruction: '拖拉每個生物到正確的分類！',
+          categories: [
+            { id: 'monera', name: '原核生物界', emoji: '🦠', color: 'green' },
+            { id: 'protist', name: '原生生物界', emoji: '🔬', color: 'blue' },
+            { id: 'fungi', name: '真菌界', emoji: '🍄', color: 'amber' },
+            { id: 'plant', name: '植物界', emoji: '🌿', color: 'teal' },
+            { id: 'animal', name: '動物界', emoji: '🐾', color: 'red' },
+          ],
           items: [
-            { id: 'monera', emoji: '🦠', label: '原核生物界', info: { title: '原核生物界', description: '這些是最簡單的生物，細胞裡面沒有細胞核（DNA 沒有被膜包起來）。包括細菌和藍綠菌。它們超級小，要用顯微鏡才看得到，但數量非常非常多！', category: '原核', categoryColor: 'green' }},
-            { id: 'protist', emoji: '🔬', label: '原生生物界', info: { title: '原生生物界', description: '有細胞核，但不屬於動物、植物或真菌的生物，通通放這裡。像草履蟲、變形蟲、矽藻、海帶都算。可以說是「不知道放哪裡就放這邊」的一群。', category: '原生', categoryColor: 'blue' }},
-            { id: 'fungi', emoji: '🍄', label: '真菌界', info: { title: '真菌界', description: '真菌不是植物！它們沒有葉綠素，不會行光合作用，要靠分解其他東西來獲得營養。香菇、黴菌、酵母菌都是真菌。它們是大自然的「清潔工」，幫忙分解枯葉和腐爛的東西。', category: '真菌', categoryColor: 'amber' }},
-            { id: 'plant', emoji: '🌿', label: '植物界', info: { title: '植物界', description: '植物有細胞壁、有葉綠素、會行光合作用。從小小的苔蘚到高大的大樹都是植物界的成員。植物是生態系的「生產者」，幫地球上其他生物製造食物和氧氣。', category: '植物', categoryColor: 'green' }},
-            { id: 'animal', emoji: '🐾', label: '動物界', info: { title: '動物界', description: '動物沒有細胞壁、不會行光合作用，要靠吃其他生物來獲得營養。從小螞蟻到大鯨魚都是動物界。人類也是動物界的成員喔！', category: '動物', categoryColor: 'red' }},
+            { id: 'i1', text: '大腸桿菌', emoji: '🧫', categoryId: 'monera', explanation: '大腸桿菌是細菌，沒有細胞核，屬於原核生物界' },
+            { id: 'i2', text: '藍綠菌', emoji: '💚', categoryId: 'monera', explanation: '藍綠菌雖然會光合作用，但沒有細胞核，是原核生物' },
+            { id: 'i3', text: '草履蟲', emoji: '🫧', categoryId: 'protist', explanation: '草履蟲是單細胞、有細胞核的原生動物' },
+            { id: 'i4', text: '海帶', emoji: '🌊', categoryId: 'protist', explanation: '海帶是藻類，屬於原生生物界，不是植物' },
+            { id: 'i5', text: '香菇', emoji: '🍄', categoryId: 'fungi', explanation: '香菇是蕈類，沒有葉綠素，靠分解有機物獲得營養' },
+            { id: 'i6', text: '酵母菌', emoji: '🍞', categoryId: 'fungi', explanation: '酵母菌是單細胞真菌，用來做麵包和釀酒' },
+            { id: 'i7', text: '玫瑰花', emoji: '🌹', categoryId: 'plant', explanation: '玫瑰是被子植物，有花有果實，屬於植物界' },
+            { id: 'i8', text: '蕨類', emoji: '🌿', categoryId: 'plant', explanation: '蕨類有維管束、會光合作用，屬於植物界' },
+            { id: 'i9', text: '老虎', emoji: '🐯', categoryId: 'animal', explanation: '老虎是哺乳動物，屬於動物界' },
+            { id: 'i10', text: '蝴蝶', emoji: '🦋', categoryId: 'animal', explanation: '蝴蝶是昆蟲，屬於動物界節肢動物門' },
           ]
         },
         quiz: {
@@ -569,17 +585,24 @@ export const units = [
       {
         id: 'concept2',
         title: '原生生物界',
-        interactionType: 'clickExplore',
+        interactionType: 'categorySort',
         content: {
-          title: '多樣的原生生物',
-          instruction: '點擊認識三大類原生生物！',
-          sceneEmoji: '🔬',
+          title: '原生生物分三大類！',
+          instruction: '把每個原生生物拖到正確的類別！',
+          categories: [
+            { id: 'protozoa', name: '原生動物', emoji: '🫧', color: 'blue' },
+            { id: 'algae', name: '藻類', emoji: '🌊', color: 'green' },
+            { id: 'slime', name: '原生菌類', emoji: '🟡', color: 'amber' },
+          ],
           items: [
-            { id: 'protozoa', emoji: '🫧', label: '原生動物', info: { title: '像動物的原生生物', description: '草履蟲和變形蟲是常見的原生動物。它們是單細胞生物，但會像動物一樣自己到處跑、自己找食物吃。草履蟲用身上的纖毛游泳，變形蟲會伸出「假足」爬行和包住食物。', category: '原生動物', categoryColor: 'blue' }},
-            { id: 'algae', emoji: '🌊', label: '藻類', info: { title: '像植物的原生生物', description: '藻類有葉綠素、會行光合作用，但構造比植物簡單很多。從小小的矽藻（單細胞）到巨大的海帶（多細胞）都是藻類。藻類住在水裡，是海洋中最重要的「生產者」，提供地球大部分的氧氣！', category: '藻類', categoryColor: 'green' }},
-            { id: 'slime', emoji: '🟡', label: '原生菌類', info: { title: '像真菌的原生生物', description: '黏菌是最有名的原生菌類。它很奇妙：有時候像一大坨黏黏的東西到處爬（像動物），有時候又會長出孢子（像真菌）。科學家發現黏菌雖然沒有腦，但竟然能「聰明地」找到迷宮的最短路線！', category: '原生菌類', categoryColor: 'amber' }},
-            { id: 'diatom', emoji: '💎', label: '矽藻', info: { title: '玻璃房子裡的小生物', description: '矽藻的細胞壁含有「矽」（做玻璃的材料），所以像住在透明玻璃屋裡一樣。它是單細胞藻類，超級小，但形狀超美，像小小的藝術品。矽藻是很多海洋生物的食物來源。', category: '藻類', categoryColor: 'teal' }},
-            { id: 'malaria', emoji: '🦟', label: '瘧原蟲', info: { title: '會讓人生病的原生動物', description: '瘧原蟲是造成「瘧疾」的原生動物，通過蚊子叮咬傳播。瘧疾在非洲等熱帶地區是很嚴重的疾病。這告訴我們，原生生物雖然小，有些也會對人類造成危害。', category: '原生動物', categoryColor: 'red' }},
+            { id: 'i1', text: '草履蟲', emoji: '🫧', categoryId: 'protozoa', explanation: '草履蟲用纖毛游泳、自己找食物吃，像動物一樣' },
+            { id: 'i2', text: '變形蟲', emoji: '🔵', categoryId: 'protozoa', explanation: '變形蟲會伸出假足爬行和包住食物' },
+            { id: 'i3', text: '瘧原蟲', emoji: '🦟', categoryId: 'protozoa', explanation: '瘧原蟲會讓人生病（瘧疾），是原生動物的一種' },
+            { id: 'i4', text: '矽藻', emoji: '💎', categoryId: 'algae', explanation: '矽藻是單細胞藻類，細胞壁含矽，像住在玻璃屋裡' },
+            { id: 'i5', text: '海帶', emoji: '🌊', categoryId: 'algae', explanation: '海帶是多細胞藻類，有葉綠素會光合作用' },
+            { id: 'i6', text: '綠藻', emoji: '💚', categoryId: 'algae', explanation: '綠藻是常見的藻類，跟植物親緣關係最近' },
+            { id: 'i7', text: '黏菌', emoji: '🟡', categoryId: 'slime', explanation: '黏菌有時像動物會爬行，有時又會長出孢子像真菌' },
+            { id: 'i8', text: '水黴菌', emoji: '🟤', categoryId: 'slime', explanation: '水黴菌看起來像真菌，但有細胞核構造不同，是原生菌類' },
           ]
         },
         quiz: {
@@ -597,17 +620,18 @@ export const units = [
       {
         id: 'concept3',
         title: '真菌界',
-        interactionType: 'clickExplore',
+        interactionType: 'matchingPairs',
         content: {
-          title: '認識真菌界',
-          instruction: '點擊了解真菌界的三大類成員！',
-          sceneEmoji: '🍄',
-          items: [
-            { id: 'features', emoji: '🧫', label: '真菌的特徵', info: { title: '不是植物的「植物」', description: '真菌有細胞壁、不會動，看起來很像植物。但它沒有葉綠素、不會光合作用，必須靠分解其他有機物（腐爛的東西）來獲取營養。它的細胞壁成分是「幾丁質」，跟昆蟲外殼一樣！', category: '基本特徵', categoryColor: 'purple' }},
-            { id: 'yeast', emoji: '🍞', label: '酵母菌', info: { title: '單細胞真菌', description: '酵母菌是最簡單的真菌，只有一個細胞。它靠「出芽生殖」繁殖——從身上長出一個小芽，小芽長大後脫落變成新的個體。人類用它來做麵包（讓麵團膨脹）和釀酒（把糖變成酒精）。', category: '酵母菌', categoryColor: 'amber' }},
-            { id: 'mold', emoji: '🟢', label: '黴菌', info: { title: '多細胞的菌絲體', description: '麵包放太久長出的綠色或白色毛毛的東西就是黴菌。黴菌由很多細長的「菌絲」組成，菌絲深入食物裡面分解營養。青黴素（盤尼西林）就是從青黴菌提煉出來的抗生素，救了無數人的命！', category: '黴菌', categoryColor: 'green' }},
-            { id: 'mushroom', emoji: '🍄', label: '蕈類', info: { title: '最大的真菌', description: '香菇、木耳、靈芝都是蕈類。我們吃的部分其實是它的「子實體」（用來散播孢子的構造），就像植物的花。蕈類真正的身體是埋在土裡或木頭裡的菌絲，可以長得非常大！', category: '蕈類', categoryColor: 'orange' }},
-            { id: 'role', emoji: '♻️', label: '真菌的生態角色', info: { title: '大自然的分解者', description: '真菌是生態系中最重要的分解者之一。它們分解枯葉、倒木和動物遺體，把有機物變回無機養分，讓植物可以再次吸收利用。沒有真菌，森林地上會堆滿枯葉，養分也無法循環！', category: '生態角色', categoryColor: 'teal' }},
+          title: '配對真菌和它的特徵',
+          instruction: '把左邊的真菌拖到右邊對應的特徵！',
+          leftLabel: '真菌',
+          rightLabel: '特徵',
+          pairs: [
+            { id: 'p1', left: { text: '酵母菌', emoji: '🍞' }, right: { text: '單細胞、出芽生殖', emoji: '🔬' }, explanation: '酵母菌是最簡單的真菌，只有一個細胞，用出芽的方式繁殖' },
+            { id: 'p2', left: { text: '青黴菌', emoji: '🟢' }, right: { text: '提煉出抗生素', emoji: '💊' }, explanation: '青黴素（盤尼西林）就是從青黴菌提煉出來的，救了無數人的命' },
+            { id: 'p3', left: { text: '香菇', emoji: '🍄' }, right: { text: '蕈類、有子實體', emoji: '🌂' }, explanation: '我們吃的香菇是子實體，真正的身體是土裡的菌絲' },
+            { id: 'p4', left: { text: '木耳', emoji: '🖤' }, right: { text: '長在枯木上', emoji: '🪵' }, explanation: '木耳是蕈類的一種，生長在枯木或倒木上，幫忙分解木頭' },
+            { id: 'p5', left: { text: '麵包黴', emoji: '🫓' }, right: { text: '菌絲深入食物', emoji: '🕸️' }, explanation: '麵包放太久長出的毛毛就是黴菌，菌絲會深入食物裡分解營養' },
           ]
         },
         quiz: {
@@ -625,17 +649,25 @@ export const units = [
       {
         id: 'concept4',
         title: '微生物與生態',
-        interactionType: 'clickExplore',
+        interactionType: 'categorySort',
         content: {
-          title: '微生物在生態系的角色',
-          instruction: '點擊了解微生物如何影響我們的世界！',
-          sceneEmoji: '🌍',
+          title: '微生物扮演什麼角色？',
+          instruction: '把每個微生物拖到它在生態系中的角色！',
+          categories: [
+            { id: 'producer', name: '生產者', emoji: '🌱', color: 'green' },
+            { id: 'decomposer', name: '分解者', emoji: '♻️', color: 'amber' },
+            { id: 'symbiosis', name: '互利共生', emoji: '🤝', color: 'blue' },
+            { id: 'pathogen', name: '致病者', emoji: '⚠️', color: 'red' },
+          ],
           items: [
-            { id: 'producer', emoji: '🌊', label: '海洋中的生產者', info: { title: '藻類：海洋的食物工廠', description: '海洋裡的藻類（特別是矽藻和浮游藻類）行光合作用產生的氧氣，佔了地球氧氣的一半以上！它們也是海洋食物鏈的基礎，小魚吃藻類，大魚吃小魚。', category: '生產者', categoryColor: 'green' }},
-            { id: 'decomposer', emoji: '♻️', label: '分解者', info: { title: '細菌和真菌：回收站', description: '細菌和真菌負責把死掉的動植物分解成簡單的養分（像氮、磷），讓植物可以再利用。這就是「物質循環」——沒有分解者，地球上的養分就會用完！', category: '分解者', categoryColor: 'amber' }},
-            { id: 'symbiosis', emoji: '🤝', label: '共生關係', info: { title: '互利共生', description: '很多微生物和其他生物互相幫助。例如根瘤菌住在豆科植物的根裡，幫植物把空氣中的氮變成養分；地衣是藻類和真菌的合體，藻類光合作用提供食物，真菌提供水分和保護。', category: '共生', categoryColor: 'blue' }},
-            { id: 'human', emoji: '🧑', label: '人體裡的微生物', info: { title: '你身上有幾兆個微生物', description: '你的腸道裡住著幾兆個細菌，它們幫你消化食物、製造維生素、對抗壞菌。人體裡的微生物數量比你自己的細胞還多！保持腸道菌的平衡對健康非常重要。', category: '人體', categoryColor: 'purple' }},
-            { id: 'harmful', emoji: '⚠️', label: '有害的微生物', info: { title: '致病微生物', description: '有些細菌（如肺結核桿菌）、原生動物（如瘧原蟲）和真菌（如香港腳的皮癬菌）會讓人生病。了解這些微生物的特性，才能更好地預防和治療疾病。', category: '致病', categoryColor: 'red' }},
+            { id: 'i1', text: '矽藻', emoji: '💎', categoryId: 'producer', explanation: '矽藻行光合作用，是海洋食物鏈的基礎，提供地球一半以上的氧氣' },
+            { id: 'i2', text: '綠藻', emoji: '💚', categoryId: 'producer', explanation: '綠藻有葉綠素，行光合作用製造有機物和氧氣' },
+            { id: 'i3', text: '腐生細菌', emoji: '🧫', categoryId: 'decomposer', explanation: '腐生細菌分解死掉的動植物，把養分還給土壤' },
+            { id: 'i4', text: '黴菌', emoji: '🟢', categoryId: 'decomposer', explanation: '黴菌分解枯葉和腐爛的東西，是重要的分解者' },
+            { id: 'i5', text: '根瘤菌', emoji: '🫘', categoryId: 'symbiosis', explanation: '根瘤菌住在豆科植物根裡，幫植物把空氣中的氮變成養分' },
+            { id: 'i6', text: '腸道益生菌', emoji: '🧑', categoryId: 'symbiosis', explanation: '腸道益生菌幫你消化食物、製造維生素、對抗壞菌' },
+            { id: 'i7', text: '肺結核桿菌', emoji: '😷', categoryId: 'pathogen', explanation: '肺結核桿菌感染肺部，造成肺結核病' },
+            { id: 'i8', text: '瘧原蟲', emoji: '🦟', categoryId: 'pathogen', explanation: '瘧原蟲通過蚊子傳播，造成瘧疾' },
           ]
         },
         quiz: {
@@ -745,18 +777,27 @@ export const units = [
       {
         id: 'concept4',
         title: '裸子植物與被子植物',
-        interactionType: 'clickExplore',
+        interactionType: 'categorySort',
         content: {
-          title: '種子植物的兩大類',
-          instruction: '點擊比較裸子植物和被子植物的不同！',
-          sceneEmoji: '🌳',
+          title: '把植物分到正確的類別！',
+          instruction: '拖拉每種植物到正確的分類！',
+          categories: [
+            { id: 'bryophyte', name: '蘚苔植物', emoji: '🌱', color: 'green' },
+            { id: 'fern', name: '蕨類植物', emoji: '🌿', color: 'teal' },
+            { id: 'gymnosperm', name: '裸子植物', emoji: '🌲', color: 'amber' },
+            { id: 'angiosperm', name: '被子植物', emoji: '🌸', color: 'pink' },
+          ],
           items: [
-            { id: 'gymnosperm', emoji: '🌲', label: '裸子植物', info: { title: '種子裸露的植物', description: '裸子植物有種子，但種子是「裸露」的，沒有果實包住。大部分裸子植物的種子藏在毬果裡面（像松果）。常見的裸子植物有松樹、柏樹、杉木、銀杏、蘇鐵。它們不會開花，靠風來傳粉。', category: '裸子植物', categoryColor: 'green' }},
-            { id: 'angiosperm', emoji: '🌸', label: '被子植物', info: { title: '有花有果實的植物', description: '被子植物是最進化的植物，有花、有果實。花負責繁殖（吸引昆蟲或鳥來傳粉），果實包住種子並幫助散播。被子植物是現在地球上種類最多、數量最多的植物，我們吃的大部分食物都來自被子植物。', category: '被子植物', categoryColor: 'pink' }},
-            { id: 'monocot', emoji: '🌾', label: '單子葉植物', info: { title: '被子植物的一類', description: '單子葉植物的種子只有一片子葉（種子最先長出來的葉子）。特徵：葉脈平行、花瓣通常 3 的倍數、莖內維管束散生。常見的有稻米、小麥、玉米、竹子、百合、蘭花。', category: '被子植物', categoryColor: 'amber' }},
-            { id: 'dicot', emoji: '🌻', label: '雙子葉植物', info: { title: '被子植物的另一類', description: '雙子葉植物的種子有兩片子葉。特徵：葉脈網狀、花瓣通常 4 或 5 的倍數、莖內維管束排成環狀。常見的有玫瑰、向日葵、豆類、蘋果樹、橡樹。我們吃的水果大部分來自雙子葉植物。', category: '被子植物', categoryColor: 'blue' }},
-            { id: 'no_water', emoji: '🌬️', label: '不再需要水', info: { title: '種子植物的大進步', description: '種子植物（裸子和被子）不需要水來幫精子游泳了！裸子植物靠風傳花粉，被子植物靠風或動物傳花粉。這讓種子植物可以住在乾燥的地方，征服了整個陸地！', category: '演化意義', categoryColor: 'purple' }},
-            { id: 'compare', emoji: '⚖️', label: '四類植物比較', info: { title: '從簡單到複雜', description: '蘚苔 → 蕨類 → 裸子 → 被子，越來越進化。蘚苔最簡單（沒有維管束和種子）；蕨類有維管束但沒種子；裸子有種子但沒花果；被子最完整（有花有果實）。', category: '總整理', categoryColor: 'teal' }},
+            { id: 'i1', text: '土馬騌', emoji: '🌱', categoryId: 'bryophyte', explanation: '土馬騌是蘚苔植物，沒有維管束，用孢子繁殖' },
+            { id: 'i2', text: '泥炭蘚', emoji: '💧', categoryId: 'bryophyte', explanation: '泥炭蘚是蘚苔，能吸收自己重量 20 倍的水' },
+            { id: 'i3', text: '筆筒樹', emoji: '🌿', categoryId: 'fern', explanation: '筆筒樹是台灣常見的樹蕨，有維管束但沒種子' },
+            { id: 'i4', text: '腎蕨', emoji: '🍃', categoryId: 'fern', explanation: '腎蕨常被用來當盆栽，葉子背面有孢子囊堆' },
+            { id: 'i5', text: '松樹', emoji: '🌲', categoryId: 'gymnosperm', explanation: '松樹是裸子植物，種子在毬果裡，沒有花和果實' },
+            { id: 'i6', text: '銀杏', emoji: '🍂', categoryId: 'gymnosperm', explanation: '銀杏是活化石也是裸子植物，種子裸露沒有果實包住' },
+            { id: 'i7', text: '玫瑰', emoji: '🌹', categoryId: 'angiosperm', explanation: '玫瑰是被子植物（雙子葉），有花有果實' },
+            { id: 'i8', text: '稻米', emoji: '🌾', categoryId: 'angiosperm', explanation: '稻米是被子植物（單子葉），葉脈平行' },
+            { id: 'i9', text: '蘇鐵', emoji: '🌴', categoryId: 'gymnosperm', explanation: '蘇鐵是裸子植物，外型像棕櫚但其實是裸子植物' },
+            { id: 'i10', text: '向日葵', emoji: '🌻', categoryId: 'angiosperm', explanation: '向日葵是被子植物（雙子葉），有花有種子有果實' },
           ]
         },
         quiz: {

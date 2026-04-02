@@ -12,6 +12,9 @@ import FossilSortingGame from '../components/interactions/FossilSortingGame'
 import EvolutionMatchGame from '../components/interactions/EvolutionMatchGame'
 import CloningLab from '../components/interactions/CloningLab'
 import GeneTransferLab from '../components/interactions/GeneTransferLab'
+import CategorySortGame from '../components/interactions/CategorySortGame'
+import MatchingPairsGame from '../components/interactions/MatchingPairsGame'
+import SequenceOrderGame from '../components/interactions/SequenceOrderGame'
 import Quiz from '../components/Quiz'
 import Celebration from '../components/Celebration'
 
@@ -25,6 +28,9 @@ const interactionComponents = {
   evolutionMatch: EvolutionMatchGame,
   cloningLab: CloningLab,
   geneTransferLab: GeneTransferLab,
+  categorySort: CategorySortGame,
+  matchingPairs: MatchingPairsGame,
+  sequenceOrder: SequenceOrderGame,
 }
 
 const PHASE = {
