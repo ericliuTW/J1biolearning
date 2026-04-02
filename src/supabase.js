@@ -203,4 +203,16 @@ export async function updateSettings(settings) {
   }
 }
 
+// Delete a student by id
+export async function deleteStudent(studentId) {
+  if (!isConfigured) return
+
+  const { error } = await supabase
+    .from('bio_students')
+    .delete()
+    .eq('id', studentId)
+
+  if (error) throw error
+}
+
 export { supabase }

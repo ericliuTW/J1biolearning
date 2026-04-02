@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { getAllStudents, getSettings, updateSettings } from '../supabase'
+import { getAllStudents, getSettings, updateSettings, deleteStudent } from '../supabase'
+import { useNavigate } from 'react-router-dom'
 import { units } from '../data/units'
 
 export default function Admin() {
+  const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
@@ -92,6 +94,18 @@ export default function Admin() {
     }
   }
 
+  const handleDeleteStudent = async (student) => {
+    const confirmed = window.confirm(`確定要刪除學生「${student.班級} ${student.姓名}」嗎？此操作無法復原。`)
+    if (!confirmed) return
+    try {
+      await deleteStudent(student.id)
+      await loadData()
+    } catch (err) {
+      console.error('刪除學生失敗:', err)
+      alert('刪除學生失敗，請稍後再試。')
+    }
+  }
+
   const exportCSV = () => {
     const headers = ['班級', '姓名', '座號']
     units.forEach(unit => {
@@ -155,6 +169,13 @@ export default function Admin() {
           )}
           <button type="submit" className="w-full btn-primary">
             登入
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            className="w-full mt-3 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            返回首頁
           </button>
         </form>
       </div>
@@ -261,6 +282,7 @@ export default function Admin() {
                         {unit.title.split(' ')[0]}
                       </th>
                     ))}
+                    <th className="text-center py-3 px-3 font-bold text-gray-600">操作</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -296,6 +318,15 @@ export default function Admin() {
                           </td>
                         )
                       })}
+                      <td className="py-3 px-3 text-center">
+                        <button
+                          onClick={() => handleDeleteStudent(student)}
+                          className="text-red-400 hover:text-red-600 text-xs transition-colors"
+                          title="刪除學生"
+                        >
+                          刪除
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -15,6 +15,8 @@ import GeneTransferLab from '../components/interactions/GeneTransferLab'
 import CategorySortGame from '../components/interactions/CategorySortGame'
 import MatchingPairsGame from '../components/interactions/MatchingPairsGame'
 import SequenceOrderGame from '../components/interactions/SequenceOrderGame'
+import DichotomousKeyGame from '../components/interactions/DichotomousKeyGame'
+import CellCompareExplore from '../components/interactions/CellCompareExplore'
 import Quiz from '../components/Quiz'
 import Celebration from '../components/Celebration'
 
@@ -31,6 +33,8 @@ const interactionComponents = {
   categorySort: CategorySortGame,
   matchingPairs: MatchingPairsGame,
   sequenceOrder: SequenceOrderGame,
+  dichotomousKey: DichotomousKeyGame,
+  cellCompare: CellCompareExplore,
 }
 
 const PHASE = {

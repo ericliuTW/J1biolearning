@@ -115,6 +115,32 @@ export const units = [
       },
       {
         id: 'concept5',
+        title: '性聯遺傳',
+        interactionType: 'clickExplore',
+        content: {
+          title: '認識性聯遺傳',
+          instruction: '有些遺傳疾病跟性別有關！點擊每個項目，了解為什麼有些病男生比較容易得到。',
+          sceneEmoji: '🧬',
+          items: [
+            { id: 'y_linked', emoji: '👨', label: 'Y染色體遺傳', info: { title: 'Y染色體遺傳', description: '有些基因只在Y染色體上。因為只有男生有Y染色體（XY），女生是XX沒有Y，所以Y染色體上的疾病只會從爸爸傳給兒子，女兒絕對不會得到！如果爸爸有Y染色體遺傳疾病，他所有的兒子都會遺傳到（100%），但女兒完全不受影響。', category: 'Y染色體', categoryColor: 'blue' }},
+            { id: 'x_recessive', emoji: '👩', label: 'X染色體隱性遺傳', info: { title: 'X染色體隱性遺傳', description: '有些疾病的基因在X染色體上，而且是隱性的。女生有兩條X染色體，就算一條有問題，另一條正常的可以「罩住」，所以女生通常只是帶因者不會發病。但男生只有一條X染色體，只要那條有問題就會發病！所以蠶豆症（G6PD缺乏症）、色盲、血友病這些病，男生得到的比例比女生高很多。如果媽媽是帶因者，兒子有50%機率發病。', category: 'X染色體隱性', categoryColor: 'red' }},
+            { id: 'not_genetic', emoji: '🏥', label: '非遺傳疾病辨別', info: { title: '不是所有疾病都是遺傳的！', description: '要小心分辨遺傳疾病和非遺傳疾病！例如B型肝炎是由病毒感染造成的「傳染病」，不是遺傳疾病。雖然媽媽可能在生產時傳給寶寶，但那是「垂直感染」不是遺傳。遺傳疾病是DNA出了問題才算，像蠶豆症、白化症、唐氏症才是遺傳疾病。', category: '知識補充', categoryColor: 'gray' }},
+          ]
+        },
+        quiz: {
+          question: '如果爸爸有Y染色體遺傳疾病，下列何者正確？',
+          options: [
+            '(A) 女兒一定會遺傳到',
+            '(B) 兒子和女兒都有50%機率遺傳',
+            '(C) 所有兒子都會遺傳到，女兒不會',
+            '(D) 只有女兒會遺傳到'
+          ],
+          correctIndex: 2,
+          explanation: 'Y染色體只會從爸爸傳給兒子（因為女兒拿到的是爸爸的X染色體）。所以爸爸的Y染色體疾病，100%的兒子都會有，但女兒完全不受影響！'
+        }
+      },
+      {
+        id: 'concept6',
         title: '遺傳疾病的諮詢',
         interactionType: 'stepProcess',
         content: {
@@ -288,8 +314,9 @@ export const units = [
             { id: 'f5', emoji: '💩', name: '糞便化石', category: '遺跡化石', info: '沒錯，連大便也能變成化石！科學家可以從裡面找到沒消化完的食物殘渣，知道這隻動物以前吃什麼。' },
             { id: 'f6', emoji: '🐟', name: '腔棘魚', category: '活化石', info: '腔棘魚長得跟幾億年前的祖先幾乎一模一樣，就像時間在牠身上停住了一樣！牠的親戚大部分都已經滅絕了，只剩牠還活著，所以被叫做「活化石」。' },
             { id: 'f7', emoji: '🌿', name: '銀杏', category: '活化石', info: '銀杏在恐龍時代就存在了！到現在長得還是差不多，牠的同類大部分都消失了，只有銀杏存活下來，所以也是「活化石」。' },
+            { id: 'f8', emoji: '🧱', name: '化石形成條件', category: '知識補充', info: '不是所有生物都能變成化石！通常要有堅硬的構造（像外骨骼、細胞壁、貝殼、骨骼）才容易被保存。軟綿綿的水母就很難變成化石。最古老的化石就是有細胞壁的微生物！而且化石被發現的位置也很重要——如果山頂上發現海洋生物化石，代表這裡曾經是海底，後來因為地殼變動被抬升到高山上了。' },
           ],
-          categories: ['遺骸化石', '遺跡化石', '活化石']
+          categories: ['遺骸化石', '遺跡化石', '活化石', '知識補充']
         },
         quiz: {
           question: '下列關於化石的敘述何者正確？',
@@ -396,19 +423,17 @@ export const units = [
       {
         id: 'concept1',
         title: '俗名與學名',
-        interactionType: 'matchingPairs',
+        interactionType: 'clickExplore',
         content: {
-          title: '配對俗名和學名',
-          instruction: '把左邊的俗名拖到右邊對應的學名！',
-          leftLabel: '俗名',
-          rightLabel: '學名',
-          pairs: [
-            { id: 'p1', left: { text: '貓', emoji: '🐱' }, right: { text: 'Felis catus', emoji: '🏷️' }, explanation: '家貓的學名是 Felis catus，Felis 是屬名，catus 是種小名' },
-            { id: 'p2', left: { text: '人類', emoji: '🧑' }, right: { text: 'Homo sapiens', emoji: '🏷️' }, explanation: '人類的學名是 Homo sapiens，意思是「聰明的人」' },
-            { id: 'p3', left: { text: '狗', emoji: '🐕' }, right: { text: 'Canis familiaris', emoji: '🏷️' }, explanation: '家犬的學名是 Canis familiaris，跟狼（Canis lupus）同屬' },
-            { id: 'p4', left: { text: '水稻', emoji: '🌾' }, right: { text: 'Oryza sativa', emoji: '🏷️' }, explanation: '水稻的學名是 Oryza sativa，全世界一半以上的人以它為主食' },
-            { id: 'p5', left: { text: '番薯', emoji: '🍠' }, right: { text: 'Ipomoea batatas', emoji: '🏷️' }, explanation: '番薯（地瓜）的學名是 Ipomoea batatas，俗名在各地不同但學名統一' },
-            { id: 'p6', left: { text: '獅子', emoji: '🦁' }, right: { text: 'Panthera leo', emoji: '🏷️' }, explanation: '獅子的學名是 Panthera leo，跟老虎（Panthera tigris）同屬' },
+          title: '生物的名字怎麼取？',
+          instruction: '點擊每個例子，了解俗名和學名的差別！',
+          sceneEmoji: '📛',
+          items: [
+            { id: 'cat', emoji: '🐱', label: '貓', info: { title: '貓的名字', description: '貓在台灣叫「貓」，英文叫 Cat，日文叫 ネコ。每個地方都不一樣！但全世界科學家都用同一個學名：Felis catus。學名就像生物的「身分證號碼」，不管你在哪個國家，都能找到同一種生物。', category: '俗名 vs 學名', categoryColor: 'blue' }},
+            { id: 'sweet_potato', emoji: '🍠', label: '番薯', info: { title: '番薯的混亂', description: '番薯在不同地方有不同叫法：番薯、地瓜、甘薯⋯都是同一種東西！這就是俗名的缺點——容易搞混。科學家給它一個學名 Ipomoea batatas，全世界都知道在說哪一種植物。', category: '同物異名', categoryColor: 'orange' }},
+            { id: 'mouse', emoji: '🐭', label: '老鼠', info: { title: '「老鼠」太多種了！', description: '你說「老鼠」，到底是哪一種？溝鼠？田鼠？倉鼠？「老鼠」這個俗名涵蓋了好幾十種不同的動物。有了學名，科學家才能精準指定是哪一種。', category: '一名多物', categoryColor: 'red' }},
+            { id: 'why', emoji: '🤔', label: '為什麼需要學名？', info: { title: '學名的重要性', description: '想像你在網路上查一種生物的資料，全世界每個國家都用自己的語言叫它不同名字，你根本搜不到！有了統一的學名，全世界的科學家就能用同一種語言溝通，不會再搞混了。', category: '核心概念', categoryColor: 'teal' }},
+            { id: 'linnaeus', emoji: '👨‍🔬', label: '林奈', info: { title: '分類學之父——林奈', description: '瑞典科學家林奈發明了「二名法」，用兩個拉丁文單字幫生物取學名。第一個字是「屬名」（就像你的姓），第二個字是「種小名」（就像你的名字）。例如人類叫 Homo sapiens。', category: '知識補充', categoryColor: 'purple' }},
           ]
         },
         quiz: {
@@ -425,15 +450,20 @@ export const units = [
       },
       {
         id: 'concept2',
-        title: '二名法',
-        interactionType: 'stepProcess',
+        title: '俗名與學名配對',
+        interactionType: 'matchingPairs',
         content: {
-          title: '學名怎麼寫？——二名法',
-          steps: [
-            { emoji: '✍️', visual: '屬名 + 種小名', title: '規則一：兩個字組成', description: '學名由兩個拉丁文單字組成。第一個字是「屬名」（像姓氏），第二個字是「種小名」（像名字）。例如人類的學名是 Homo sapiens，Homo 是屬名，sapiens 是種小名。', actionText: '了解', resultText: '學名 = 屬名 + 種小名' },
-            { emoji: '🔤', visual: 'Homo sapiens', title: '規則二：大小寫', description: '屬名的第一個字母要大寫，種小名全部小寫。例如：Homo sapiens（人類）、Felis catus（貓）、Canis lupus（狼）。', actionText: '記住了', resultText: '屬名大寫開頭，種小名全小寫' },
-            { emoji: '📝', visual: 'Homo sapiens', title: '規則三：要斜體', description: '學名在印刷品上要用斜體字，手寫的時候要畫底線。這樣別人一看就知道這是學名，不是普通的字。', actionText: '了解', resultText: '印刷用斜體，手寫畫底線' },
-            { emoji: '👪', visual: '貓科 → 貓屬 → 家貓', title: '屬名相同 = 親戚', description: '屬名一樣的生物代表牠們是近親。例如 Felis catus（家貓）和 Felis silvestris（野貓）都姓 Felis，代表牠們關係很近，就像同一個家族的成員。', actionText: '太酷了', resultText: '屬名相同的生物親緣關係較近！' },
+          title: '配對俗名和學名',
+          instruction: '學了那麼多學名，來試試看你記住了沒！把左邊的俗名拖到右邊對應的學名。',
+          leftLabel: '俗名',
+          rightLabel: '學名',
+          pairs: [
+            { id: 'p1', left: { text: '貓', emoji: '🐱' }, right: { text: 'Felis catus', emoji: '🏷️' }, explanation: '家貓的學名是 Felis catus，Felis 是屬名，catus 是種小名' },
+            { id: 'p2', left: { text: '人類', emoji: '🧑' }, right: { text: 'Homo sapiens', emoji: '🏷️' }, explanation: '人類的學名是 Homo sapiens，意思是「聰明的人」' },
+            { id: 'p3', left: { text: '狗', emoji: '🐕' }, right: { text: 'Canis familiaris', emoji: '🏷️' }, explanation: '家犬的學名是 Canis familiaris，跟狼（Canis lupus）同屬' },
+            { id: 'p4', left: { text: '水稻', emoji: '🌾' }, right: { text: 'Oryza sativa', emoji: '🏷️' }, explanation: '水稻的學名是 Oryza sativa，全世界一半以上的人以它為主食' },
+            { id: 'p5', left: { text: '番薯', emoji: '🍠' }, right: { text: 'Ipomoea batatas', emoji: '🏷️' }, explanation: '番薯（地瓜）的學名是 Ipomoea batatas，俗名在各地不同但學名統一' },
+            { id: 'p6', left: { text: '獅子', emoji: '🦁' }, right: { text: 'Panthera leo', emoji: '🏷️' }, explanation: '獅子的學名是 Panthera leo，跟老虎（Panthera tigris）同屬' },
           ]
         },
         quiz: {
@@ -450,12 +480,67 @@ export const units = [
       },
       {
         id: 'concept3',
+        title: '二名法',
+        interactionType: 'stepProcess',
+        content: {
+          title: '學名怎麼寫？——二名法',
+          steps: [
+            { emoji: '✍️', visual: '屬名 + 種小名', title: '規則一：兩個字組成', description: '學名由兩個拉丁文單字組成。第一個字是「屬名」（像姓氏），第二個字是「種小名」（像名字）。例如人類的學名是 Homo sapiens，Homo 是屬名，sapiens 是種小名。', actionText: '了解', resultText: '學名 = 屬名 + 種小名' },
+            { emoji: '🔤', visual: 'Homo sapiens', title: '規則二：大小寫', description: '屬名的第一個字母要大寫，種小名全部小寫。例如：Homo sapiens（人類）、Felis catus（貓）、Canis lupus（狼）。', actionText: '記住了', resultText: '屬名大寫開頭，種小名全小寫' },
+            { emoji: '📝', visual: 'Homo sapiens', title: '規則三：要斜體', description: '學名在印刷品上要用斜體字，手寫的時候要畫底線。這樣別人一看就知道這是學名，不是普通的字。', actionText: '了解', resultText: '印刷用斜體，手寫畫底線' },
+            { emoji: '👪', visual: '貓科 → 貓屬 → 家貓', title: '屬名相同 = 親戚', description: '屬名一樣的生物代表牠們是近親。例如 Felis catus（家貓）和 Felis silvestris（野貓）都姓 Felis，代表牠們關係很近，就像同一個家族的成員。', actionText: '太酷了', resultText: '屬名相同的生物親緣關係較近！' },
+          ]
+        },
+        quiz: {
+          question: '下列何者能說明兩種生物的親緣關係較近？',
+          options: [
+            '(A) 俗名相似',
+            '(B) 體型差不多',
+            '(C) 學名的屬名相同',
+            '(D) 住在同一個地方'
+          ],
+          correctIndex: 2,
+          explanation: '學名的屬名相同代表同一屬，親緣關係比較近。像家貓 Felis catus 和野貓 Felis silvestris 都是 Felis 屬，是近親！'
+        }
+      },
+      {
+        id: 'concept4',
         title: '分類的七個階層',
+        interactionType: 'clickExplore',
+        content: {
+          title: '生物分類的七個層級',
+          instruction: '先來認識分類的七個階層，等一下要考你排序喔！',
+          sceneEmoji: '📊',
+          items: [
+            { id: 'kingdom', emoji: '🌍', label: '界', info: { title: '界（最大）', description: '「界」是最大的分類，就像把所有生物分成幾個超大的家族。目前分成五界：原核生物界、原生生物界、真菌界、植物界、動物界。', category: '最大', categoryColor: 'red' }},
+            { id: 'phylum', emoji: '🚪', label: '門', info: { title: '門', description: '同一界裡面再細分成幾個「門」。例如動物界裡有脊索動物門（有脊椎的）和節肢動物門（有外骨骼的，像昆蟲和螃蟹）。', category: '第二層', categoryColor: 'orange' }},
+            { id: 'class', emoji: '📊', label: '綱', info: { title: '綱', description: '同一門再分成幾個「綱」。例如脊索動物門裡有哺乳綱（哺乳動物）、鳥綱（鳥類）、爬蟲綱（蜥蜴、蛇）等等。', category: '第三層', categoryColor: 'amber' }},
+            { id: 'order', emoji: '📁', label: '目', info: { title: '目', description: '哺乳綱裡面又分成很多「目」，例如食肉目（獅子、老虎、貓）、靈長目（人、猴子）。你和猴子都是靈長目的喔！', category: '第四層', categoryColor: 'green' }},
+            { id: 'family', emoji: '👨‍👩‍👧‍👦', label: '科', info: { title: '科', description: '食肉目裡面又分成貓科（獅子、老虎、貓）、犬科（狗、狐狸、狼）。同一科的生物長得更像了。', category: '第五層', categoryColor: 'teal' }},
+            { id: 'genus', emoji: '🏷️', label: '屬', info: { title: '屬', description: '貓科裡面又分成豹屬（獅子、老虎）和貓屬（家貓、野貓）。屬名就是學名的第一個字！', category: '第六層', categoryColor: 'blue' }},
+            { id: 'species', emoji: '🎯', label: '種', info: { title: '種（最小）', description: '「種」是最小的分類單位。同一種的生物可以互相交配生出有生殖能力的後代。例如家貓就是一個種：Felis catus。口訣：界門綱目科屬種！', category: '最小', categoryColor: 'purple' }},
+          ]
+        },
+        quiz: {
+          question: '下列哪兩種生物的親緣關係最近？',
+          options: [
+            '(A) 同界不同門',
+            '(B) 同門不同綱',
+            '(C) 同綱不同目',
+            '(D) 同屬不同種'
+          ],
+          correctIndex: 3,
+          explanation: '分類階層越小，生物越相似、關係越近。同「屬」的生物比同「界」的生物關係近多了！就像同班同學比同校同學更熟一樣。'
+        }
+      },
+      {
+        id: 'concept5',
+        title: '排出分類階層',
         interactionType: 'sequenceOrder',
         content: {
           title: '排出正確的分類階層',
           instruction: '把分類階層從大到小排列！',
-          description: '生物分類有七個層級，從最大的「界」到最小的「種」，你能排出正確的順序嗎？',
+          description: '剛剛學了七個分類層級，現在來挑戰排序吧！從最大的排到最小的。',
           items: [
             { id: 's1', text: '界', emoji: '🌍', detail: '最大的分類單位，如動物界、植物界' },
             { id: 's2', text: '門', emoji: '🚪', detail: '如脊索動物門、節肢動物門' },
@@ -480,12 +565,40 @@ export const units = [
         }
       },
       {
-        id: 'concept4',
+        id: 'concept6',
         title: '五界分類',
+        interactionType: 'clickExplore',
+        content: {
+          title: '認識生物的五大王國',
+          instruction: '先來了解五界各有什麼特徵，等一下要挑戰分類遊戲！',
+          sceneEmoji: '🌍',
+          items: [
+            { id: 'monera', emoji: '🦠', label: '原核生物界', info: { title: '原核生物界', description: '這些是最簡單的生物，細胞裡面沒有細胞核（DNA 沒有被膜包起來）。包括細菌和藍綠菌。它們超級小，要用顯微鏡才看得到，但數量非常非常多！', category: '原核', categoryColor: 'green' }},
+            { id: 'protist', emoji: '🔬', label: '原生生物界', info: { title: '原生生物界', description: '有細胞核，但不屬於動物、植物或真菌的生物，通通放這裡。像草履蟲、變形蟲、矽藻、海帶都算。可以說是「不知道放哪裡就放這邊」的一群。', category: '原生', categoryColor: 'blue' }},
+            { id: 'fungi', emoji: '🍄', label: '真菌界', info: { title: '真菌界', description: '真菌不是植物！它們沒有葉綠素，不會行光合作用，要靠分解其他東西來獲得營養。香菇、黴菌、酵母菌都是真菌。它們是大自然的「清潔工」，幫忙分解枯葉和腐爛的東西。', category: '真菌', categoryColor: 'amber' }},
+            { id: 'plant', emoji: '🌿', label: '植物界', info: { title: '植物界', description: '植物有細胞壁、有葉綠素、會行光合作用。從小小的苔蘚到高大的大樹都是植物界的成員。植物是生態系的「生產者」，幫地球上其他生物製造食物和氧氣。', category: '植物', categoryColor: 'green' }},
+            { id: 'animal', emoji: '🐾', label: '動物界', info: { title: '動物界', description: '動物沒有細胞壁、不會行光合作用，要靠吃其他生物來獲得營養。從小螞蟻到大鯨魚都是動物界。人類也是動物界的成員喔！', category: '動物', categoryColor: 'red' }},
+          ]
+        },
+        quiz: {
+          question: '下列何者是真菌界和植物界最大的差別？',
+          options: [
+            '(A) 有沒有細胞壁',
+            '(B) 有沒有葉綠素、能否行光合作用',
+            '(C) 是不是多細胞',
+            '(D) 能不能移動'
+          ],
+          correctIndex: 1,
+          explanation: '真菌和植物都有細胞壁、都不會動，看起來很像。但最大的差別是：植物有葉綠素會光合作用，真菌沒有，只能靠分解其他東西來獲得營養。'
+        }
+      },
+      {
+        id: 'concept7',
+        title: '五界分類挑戰',
         interactionType: 'categorySort',
         content: {
           title: '把生物分到正確的界！',
-          instruction: '拖拉每個生物到正確的分類！',
+          instruction: '運用剛才學到的知識，把每個生物拖到正確的分類箱裡！',
           categories: [
             { id: 'monera', name: '原核生物界', emoji: '🦠', color: 'green' },
             { id: 'protist', name: '原生生物界', emoji: '🔬', color: 'blue' },
@@ -519,19 +632,20 @@ export const units = [
         }
       },
       {
-        id: 'concept5',
-        title: '病毒與檢索表',
+        id: 'concept8',
+        title: '病毒',
         interactionType: 'clickExplore',
         content: {
-          title: '病毒和生物分類工具',
-          instruction: '點擊了解病毒的特殊性和檢索表的使用！',
+          title: '五界以外的怪東西——病毒',
+          instruction: '點擊探索病毒的構造、生存方式和常見病毒！',
           sceneEmoji: '🦠',
           items: [
-            { id: 'virus_struct', emoji: '🧬', label: '病毒的構造', info: { title: '病毒很簡單', description: '病毒超級簡單，只有一段遺傳物質（DNA 或 RNA）外面包著一層蛋白質外殼。它沒有細胞結構，所以不算真正的「生物」。就像一封信，只有信紙和信封，沒有自己的房子。', category: '病毒', categoryColor: 'red' }},
-            { id: 'virus_life', emoji: '🏠', label: '病毒怎麼活？', info: { title: '寄生才能繁殖', description: '病毒自己不能吃東西、不能產生能量、不能自己複製。它必須跑進其他生物的細胞裡面，借用細胞的工具來複製自己。所以病毒離開宿主就什麼都不能做，像一個沒有電池的遙控器。', category: '病毒', categoryColor: 'red' }},
-            { id: 'virus_not_life', emoji: '❓', label: '病毒是生物嗎？', info: { title: '五界以外的存在', description: '病毒不屬於五界中的任何一界！因為它沒有細胞結構，不能獨立生存和繁殖。科學家通常不把病毒歸類為生物。但它又有遺傳物質、可以演化，所以算是生物和非生物的「邊界」。', category: '核心概念', categoryColor: 'purple' }},
-            { id: 'virus_example', emoji: '😷', label: '常見的病毒', info: { title: '生活中的病毒', description: '流感病毒讓你發燒流鼻涕、腸病毒讓你手腳起水泡、COVID-19 的冠狀病毒⋯這些都是病毒造成的。噬菌體是專門攻擊細菌的病毒，科學家正在研究用它來對付超級細菌！', category: '病毒', categoryColor: 'orange' }},
-            { id: 'dichotomous', emoji: '🔑', label: '檢索表', info: { title: '生物分類的工具', description: '檢索表就像一個「是非題闖關遊戲」。每一關問你一個問題（例如：有沒有翅膀？），根據你的回答走不同的路，最後就能找到這個生物是什麼。科學家用檢索表來快速辨認不認識的生物。', category: '分類工具', categoryColor: 'teal' }},
+            { id: 'virus_struct', emoji: '🧬', label: '病毒的構造', info: { title: '🧬 病毒的構造超簡單', description: '病毒只有兩層：最裡面是一段遺傳物質（DNA 或 RNA），外面包著一層「蛋白質外殼」。有些病毒外面還有一層「套膜」（從宿主細胞偷來的）。它沒有細胞膜、沒有細胞質、沒有胞器，比細胞簡單太多了！就像一封只有信紙和信封的信，連房子都沒有。', category: '構造', categoryColor: 'red' }},
+            { id: 'virus_cycle', emoji: '🔄', label: '病毒怎麼繁殖？', info: { title: '🔄 入侵 → 複製 → 爆發', description: '病毒繁殖分四步：①附著在宿主細胞表面 → ②把自己的遺傳物質注入細胞裡 → ③利用細胞的工具大量複製自己 → ④新病毒太多，細胞被撐破，病毒跑出去感染更多細胞。整個過程就像壞人闖進工廠，強迫工人替自己做武器！', category: '生活史', categoryColor: 'orange' }},
+            { id: 'virus_not_life', emoji: '❓', label: '病毒是生物嗎？', info: { title: '❓ 五界以外的存在', description: '病毒不屬於五界中的任何一界！因為它：❌ 沒有細胞結構 ❌ 不能獨立代謝 ❌ 不能自行繁殖。但它 ✅ 有遺傳物質 ✅ 可以演化突變。所以科學家說病毒在「生物和非生物的邊界」，不算真正的生物。', category: '核心概念', categoryColor: 'purple' }},
+            { id: 'flu', emoji: '🤒', label: '流感病毒', info: { title: '🤒 流感病毒', description: '流感病毒讓你發燒、喉嚨痛、全身痠痛。它很會「變裝」——每年都會突變，所以每年都要打新的流感疫苗。流感病毒的外型像一顆長了很多突起的球，那些突起就是它用來「黏住」你的細胞的工具。', category: '常見病毒', categoryColor: 'blue' }},
+            { id: 'covid', emoji: '👑', label: '冠狀病毒', info: { title: '👑 冠狀病毒', description: 'COVID-19 的病原體。它的表面有很多「棘突蛋白」，看起來像皇冠，所以叫冠狀病毒。棘突蛋白就像鑰匙，能打開人體細胞表面的「鎖」（ACE2 受體），讓病毒跑進去。疫苗就是教你的免疫系統認識這把「鑰匙」。', category: '常見病毒', categoryColor: 'teal' }},
+            { id: 'phage', emoji: '🔬', label: '噬菌體', info: { title: '🔬 噬菌體——病毒也能當好人？', description: '噬菌體是專門攻擊「細菌」的病毒！它長得像一個登月小艇，有頭部（裝 DNA）和腳（用來附著在細菌上）。科學家正在研究用噬菌體來殺死抗藥性超級細菌，說不定以後噬菌體會成為新型的「抗生素」！', category: '常見病毒', categoryColor: 'green' }},
           ]
         },
         quiz: {
@@ -545,6 +659,83 @@ export const units = [
           correctIndex: 3,
           explanation: '病毒沒有細胞結構，不能自己產生能量或複製自己，必須跑進活細胞裡面「借用」細胞的工具來繁殖。它不屬於五界中的任何一界。'
         }
+      },
+      {
+        id: 'concept9',
+        title: '檢索表',
+        interactionType: 'dichotomousKey',
+        content: {
+          title: '用檢索表辨認生物',
+          instruction: '檢索表就像闖關遊戲，回答「是」或「否」就能找出未知生物！來試試看吧！',
+          organisms: [
+            {
+              id: 'org1',
+              name: '大腸桿菌',
+              emoji: '🦠',
+              keys: [
+                { question: '有沒有細胞核？', answer: false },
+              ]
+            },
+            {
+              id: 'org2',
+              name: '香菇',
+              emoji: '🍄',
+              keys: [
+                { question: '有沒有細胞核？', answer: true },
+                { question: '會不會自己製造食物（光合作用）？', answer: false },
+                { question: '是不是動物（會移動、吃東西）？', answer: false },
+              ]
+            },
+            {
+              id: 'org3',
+              name: '玫瑰',
+              emoji: '🌹',
+              keys: [
+                { question: '有沒有細胞核？', answer: true },
+                { question: '會不會自己製造食物（光合作用）？', answer: true },
+                { question: '有沒有維管束？', answer: true },
+                { question: '有沒有種子？', answer: true },
+                { question: '有沒有花和果實？', answer: true },
+              ]
+            },
+            {
+              id: 'org4',
+              name: '松樹',
+              emoji: '🌲',
+              keys: [
+                { question: '有沒有細胞核？', answer: true },
+                { question: '會不會自己製造食物（光合作用）？', answer: true },
+                { question: '有沒有維管束？', answer: true },
+                { question: '有沒有種子？', answer: true },
+                { question: '有沒有花和果實？', answer: false },
+              ]
+            },
+            {
+              id: 'org5',
+              name: '老鷹',
+              emoji: '🦅',
+              keys: [
+                { question: '有沒有細胞核？', answer: true },
+                { question: '會不會自己製造食物（光合作用）？', answer: false },
+                { question: '是不是動物（會移動、吃東西）？', answer: true },
+                { question: '有沒有脊椎？', answer: true },
+                { question: '是不是恆溫動物？', answer: true },
+                { question: '有沒有羽毛？', answer: true },
+              ]
+            },
+          ]
+        },
+        quiz: {
+          question: '關於檢索表，下列何者正確？',
+          options: [
+            '(A) 檢索表只能用來分類動物',
+            '(B) 檢索表每個問題都有「是」和「否」兩條路',
+            '(C) 使用檢索表前要先知道生物的名字',
+            '(D) 檢索表只有科學家才能使用'
+          ],
+          correctIndex: 1,
+          explanation: '檢索表的特色就是每一步都是二選一（是或否），根據答案走不同的路，最後就能辨認出生物的身分。任何人都可以使用，不需要先知道名字！'
+        }
       }
     ]
   },
@@ -556,19 +747,22 @@ export const units = [
     concepts: [
       {
         id: 'concept1',
-        title: '原核生物界',
-        interactionType: 'clickExplore',
+        title: '細菌長什麼樣？',
+        interactionType: 'cellCompare',
         content: {
-          title: '最古老的生物——原核生物',
-          instruction: '點擊每個項目，認識原核生物的世界！',
-          sceneEmoji: '🦠',
-          items: [
-            { id: 'features', emoji: '🔬', label: '原核生物的特徵', info: { title: '沒有細胞核的生物', description: '原核生物的細胞裡沒有細胞核，DNA 就這樣散在細胞裡面，沒有被膜包起來。它們是地球上最早出現的生物，已經存在了 35 億年！雖然個頭小，但數量多到嚇人。', category: '基本特徵', categoryColor: 'blue' }},
-            { id: 'bacteria', emoji: '🧫', label: '細菌', info: { title: '無所不在的細菌', description: '細菌幾乎到處都有：土壤裡、空氣中、你的手上、你的肚子裡⋯。大部分的細菌對人體無害，有些還有幫助！像腸道裡的益生菌幫助消化，根瘤菌幫植物抓住空氣中的氮。只有少部分細菌會讓人生病。', category: '細菌', categoryColor: 'green' }},
-            { id: 'shapes', emoji: '⚪', label: '細菌的形狀', info: { title: '球菌、桿菌、螺旋菌', description: '細菌雖然都很小，但形狀不一樣。圓圓的叫「球菌」、像棒子的叫「桿菌」、像螺旋麵的叫「螺旋菌」。科學家用形狀來幫細菌分類。', category: '細菌', categoryColor: 'green' }},
-            { id: 'cyano', emoji: '💚', label: '藍綠菌', info: { title: '會光合作用的原核生物', description: '藍綠菌是很特別的原核生物，它有葉綠素，會行光合作用！以前人們以為它是藻類（所以叫「藍綠藻」），後來發現它沒有細胞核，其實是細菌。水池表面那層綠綠的東西，很可能就是藍綠菌。', category: '藍綠菌', categoryColor: 'teal' }},
-            { id: 'decompose', emoji: '♻️', label: '分解者的角色', info: { title: '大自然的回收站', description: '很多細菌是「分解者」，它們會把枯葉、動物遺體等分解成簡單的養分，讓植物可以再利用。沒有細菌，地球早就被垃圾堆滿了！', category: '生態角色', categoryColor: 'amber' }},
-          ]
+          title: '細菌 vs 動物細胞',
+          instruction: '點擊每個標註，比較細菌和你學過的動物細胞有什麼不同！',
+          referenceCell: { name: '動物細胞（你學過的）', type: 'animal' },
+          targetCell: { name: '細菌（原核生物）', type: 'bacteria' },
+          comparisons: [
+            { id: 'nucleus', label: '細胞核', emoji: '🟣', reference: '有細胞核，DNA 被核膜包住保護', target: '沒有細胞核！DNA 像一團亂線散在細胞裡', highlight: 'difference', summary: '這是原核生物最大的特徵——沒有細胞核' },
+            { id: 'size', label: '大小', emoji: '📏', reference: '直徑約 10~30 微米', target: '直徑只有 1~5 微米，比動物細胞小很多', highlight: 'difference', summary: '細菌比動物細胞小 5~10 倍，要用高倍顯微鏡才看得到' },
+            { id: 'wall', label: '細胞壁', emoji: '🧱', reference: '沒有細胞壁，只有柔軟的細胞膜', target: '有堅硬的細胞壁，保護細菌', highlight: 'unique', summary: '細菌有細胞壁，動物細胞沒有' },
+            { id: 'organelle', label: '胞器', emoji: '⚙️', reference: '有粒線體、內質網等各種胞器', target: '幾乎沒有胞器，構造非常簡單', highlight: 'difference', summary: '細菌的內部構造比動物細胞簡單非常多' },
+            { id: 'flagella', label: '鞭毛', emoji: '〰️', reference: '通常沒有鞭毛', target: '有些細菌有鞭毛，可以游泳移動', highlight: 'unique', summary: '鞭毛像小尾巴，幫助細菌在液體中移動' },
+            { id: 'cyanobacteria', label: '藍綠菌', emoji: '💚', reference: '不會光合作用（動物細胞）', target: '藍綠菌也是原核生物，但能行光合作用！是地球上最早的產氧者', highlight: 'unique', summary: '藍綠菌雖叫「藍綠藻」但沒有細胞核，是原核生物不是藻類' },
+          ],
+          funFact: '你的身體裡有幾兆個細菌，數量比你自己的細胞還多！大部分都是好菌，幫你消化食物。優格裡的乳酸菌也是細菌（原核生物），不是真菌喔！'
         },
         quiz: {
           question: '下列關於原核生物的敘述何者正確？',
@@ -579,16 +773,47 @@ export const units = [
             '(D) 細菌只有一種形狀'
           ],
           correctIndex: 2,
-          explanation: '原核生物最大的特徵就是沒有細胞核，DNA 直接散在細胞質裡。藍綠菌雖然叫「藍綠藻」，但它沒有細胞核，是原核生物不是藻類。細菌有球菌、桿菌、螺旋菌等不同形狀。'
+          explanation: '原核生物最大的特徵就是沒有細胞核，DNA 直接散在細胞質裡。藍綠菌雖然叫「藍綠藻」，但它沒有細胞核，是原核生物不是藻類。'
         }
       },
       {
         id: 'concept2',
-        title: '原生生物界',
+        title: '原生生物長什麼樣？',
+        interactionType: 'cellCompare',
+        content: {
+          title: '原生動物 vs 動物細胞',
+          instruction: '原生生物有細胞核，但跟動物細胞又不太一樣。點擊比較看看！',
+          referenceCell: { name: '動物細胞', type: 'animal' },
+          targetCell: { name: '變形蟲（原生動物）', type: 'protist' },
+          comparisons: [
+            { id: 'nucleus', label: '細胞核', emoji: '🟣', reference: '有細胞核', target: '也有細胞核！比細菌更進化', highlight: 'similar', summary: '原生生物和動物細胞一樣有細胞核，這是跟細菌最大的不同' },
+            { id: 'shape', label: '外型', emoji: '🫧', reference: '形狀比較固定', target: '變形蟲會不斷改變形狀，伸出「假足」', highlight: 'difference', summary: '變形蟲沒有固定形狀，會伸出假足來移動和捕食' },
+            { id: 'food', label: '食物泡', emoji: '🔵', reference: '沒有食物泡', target: '有食物泡，用來消化吃進來的食物', highlight: 'unique', summary: '變形蟲用假足把食物包起來，形成食物泡再慢慢消化' },
+            { id: 'single', label: '單細胞', emoji: '1️⃣', reference: '多細胞生物的其中一個細胞', target: '整個生物就只有一個細胞！', highlight: 'difference', summary: '原生動物用一個細胞完成所有生命功能：吃、呼吸、排泄、繁殖' },
+            { id: 'types', label: '原生生物三大類', emoji: '📊', reference: '—', target: '原生動物（像動物）、藻類（像植物）、原生菌類（像真菌）', highlight: 'unique', summary: '原生生物界很多樣：有像動物的、像植物的、像真菌的' },
+            { id: 'euglena', label: '眼蟲', emoji: '👁️', reference: '動物不會光合作用', target: '眼蟲超特別——有葉綠素會光合作用，但也會運動吃東西，同時像動物又像植物！', highlight: 'unique', summary: '眼蟲是原生生物界最特殊的例子，同時有動物和植物的特性' },
+          ],
+          funFact: '黏菌（原生菌類）雖然沒有腦，卻能找到迷宮的最短路線！科學家用它來設計城市交通路線。'
+        },
+        quiz: {
+          question: '下列哪一種生物有細胞核、會行光合作用，但不屬於植物界？',
+          options: [
+            '(A) 細菌',
+            '(B) 藍綠菌',
+            '(C) 海帶',
+            '(D) 香菇'
+          ],
+          correctIndex: 2,
+          explanation: '海帶是藻類，屬於原生生物界。它有細胞核、有葉綠素、會光合作用，但構造比植物簡單，沒有真正的根莖葉，所以不算植物。'
+        }
+      },
+      {
+        id: 'concept3',
+        title: '原生生物分類挑戰',
         interactionType: 'categorySort',
         content: {
           title: '原生生物分三大類！',
-          instruction: '把每個原生生物拖到正確的類別！',
+          instruction: '學了原生生物的三大類，現在把它們分到正確的類別吧！',
           categories: [
             { id: 'protozoa', name: '原生動物', emoji: '🫧', color: 'blue' },
             { id: 'algae', name: '藻類', emoji: '🌊', color: 'green' },
@@ -602,28 +827,58 @@ export const units = [
             { id: 'i5', text: '海帶', emoji: '🌊', categoryId: 'algae', explanation: '海帶是多細胞藻類，有葉綠素會光合作用' },
             { id: 'i6', text: '綠藻', emoji: '💚', categoryId: 'algae', explanation: '綠藻是常見的藻類，跟植物親緣關係最近' },
             { id: 'i7', text: '黏菌', emoji: '🟡', categoryId: 'slime', explanation: '黏菌有時像動物會爬行，有時又會長出孢子像真菌' },
-            { id: 'i8', text: '水黴菌', emoji: '🟤', categoryId: 'slime', explanation: '水黴菌看起來像真菌，但有細胞核構造不同，是原生菌類' },
+            { id: 'i8', text: '水黴菌', emoji: '🟤', categoryId: 'slime', explanation: '水黴菌看起來像真菌，但構造不同，是原生菌類' },
           ]
         },
         quiz: {
-          question: '下列哪一種生物有細胞核、會行光合作用，但不屬於植物界？',
+          question: '原生生物界的三大類，下列配對何者正確？',
           options: [
-            '(A) 細菌',
-            '(B) 藍綠菌',
-            '(C) 海帶',
-            '(D) 香菇'
+            '(A) 草履蟲——藻類',
+            '(B) 海帶——原生動物',
+            '(C) 黏菌——原生菌類',
+            '(D) 矽藻——原生菌類'
           ],
           correctIndex: 2,
-          explanation: '海帶是藻類，屬於原生生物界。它有細胞核、有葉綠素、會光合作用，但構造比植物簡單，沒有真正的根、莖、葉，所以不算植物。細菌和藍綠菌沒有細胞核，香菇是真菌不會光合作用。'
+          explanation: '黏菌是原生菌類（有時像動物、有時像真菌）。草履蟲是原生動物，海帶和矽藻都是藻類。'
         }
       },
       {
-        id: 'concept3',
-        title: '真菌界',
+        id: 'concept4',
+        title: '真菌跟植物有什麼不同？',
+        interactionType: 'cellCompare',
+        content: {
+          title: '真菌 vs 植物細胞',
+          instruction: '真菌看起來很像植物，但其實差很多！點擊比較看看。',
+          referenceCell: { name: '植物細胞（你學過的）', type: 'plant' },
+          targetCell: { name: '真菌細胞', type: 'fungi' },
+          comparisons: [
+            { id: 'wall', label: '細胞壁材質', emoji: '🧱', reference: '細胞壁是「纖維素」做的', target: '細胞壁是「幾丁質」做的（跟昆蟲外殼一樣！）', highlight: 'difference', summary: '雖然都有細胞壁，但材質完全不同！真菌的是幾丁質，植物的是纖維素' },
+            { id: 'chloro', label: '葉綠素', emoji: '💚', reference: '有葉綠體，含有葉綠素，能行光合作用', target: '完全沒有葉綠體！不能光合作用', highlight: 'difference', summary: '這是最關鍵的差別——真菌沒有葉綠素，不能自己製造食物' },
+            { id: 'nutrition', label: '營養方式', emoji: '🍽️', reference: '自營：用光合作用自己製造食物', target: '異營：靠分解其他有機物（腐爛的東西）獲取營養', highlight: 'difference', summary: '植物自己做飯（光合作用），真菌吃別人的剩飯（分解有機物）' },
+            { id: 'vacuole', label: '液泡', emoji: '💧', reference: '有很大的中央液泡', target: '液泡較小', highlight: 'difference', summary: '植物有巨大的中央液泡儲存水分，真菌的液泡比較小' },
+            { id: 'nucleus', label: '細胞核', emoji: '🟣', reference: '有細胞核', target: '也有細胞核', highlight: 'similar', summary: '真菌和植物都有細胞核，都是真核生物' },
+          ],
+          funFact: '世界上最大的生物是一株蜜環菌（真菌），它的菌絲網在地底下蔓延了 9.6 平方公里，比一千個足球場還大！'
+        },
+        quiz: {
+          question: '下列關於真菌的敘述何者錯誤？',
+          options: [
+            '(A) 真菌有葉綠素，可以行光合作用',
+            '(B) 酵母菌是單細胞真菌',
+            '(C) 青黴素是從黴菌提煉的抗生素',
+            '(D) 真菌在生態系中扮演分解者角色'
+          ],
+          correctIndex: 0,
+          explanation: '真菌沒有葉綠素，不會光合作用！它是靠分解其他有機物來獲得營養的。'
+        }
+      },
+      {
+        id: 'concept5',
+        title: '真菌配對挑戰',
         interactionType: 'matchingPairs',
         content: {
           title: '配對真菌和它的特徵',
-          instruction: '把左邊的真菌拖到右邊對應的特徵！',
+          instruction: '認識了真菌的特色，來挑戰配對吧！',
           leftLabel: '真菌',
           rightLabel: '特徵',
           pairs: [
@@ -635,20 +890,20 @@ export const units = [
           ]
         },
         quiz: {
-          question: '下列關於真菌的敘述何者錯誤？',
+          question: '下列哪一種真菌是單細胞生物？',
           options: [
-            '(A) 真菌有葉綠素，可以行光合作用',
-            '(B) 酵母菌是單細胞真菌',
-            '(C) 青黴素是從黴菌提煉的抗生素',
-            '(D) 真菌在生態系中扮演分解者角色'
+            '(A) 香菇',
+            '(B) 酵母菌',
+            '(C) 青黴菌',
+            '(D) 木耳'
           ],
-          correctIndex: 0,
-          explanation: '真菌沒有葉綠素，不會光合作用！它是靠分解其他有機物來獲得營養的。真菌和植物雖然都不會動、都有細胞壁，但營養方式完全不同。'
+          correctIndex: 1,
+          explanation: '酵母菌是唯一常見的單細胞真菌。香菇、木耳是蕈類（多細胞），青黴菌是黴菌（多細胞菌絲體）。'
         }
       },
       {
-        id: 'concept4',
-        title: '微生物與生態',
+        id: 'concept6',
+        title: '微生物生態角色',
         interactionType: 'categorySort',
         content: {
           title: '微生物扮演什麼角色？',
@@ -692,18 +947,48 @@ export const units = [
     concepts: [
       {
         id: 'concept1',
-        title: '植物界的特徵',
+        title: '植物細胞 vs 動物細胞',
+        interactionType: 'cellCompare',
+        content: {
+          title: '植物細胞 vs 動物細胞',
+          instruction: '植物細胞跟動物細胞長得不一樣！點擊比較看看有什麼差別。',
+          referenceCell: { name: '動物細胞', type: 'animal' },
+          targetCell: { name: '植物細胞', type: 'plant' },
+          comparisons: [
+            { id: 'wall', label: '細胞壁', emoji: '🧱', reference: '沒有細胞壁', target: '有堅硬的纖維素細胞壁，在細胞膜外面', highlight: 'unique', summary: '細胞壁讓植物細胞有固定形狀，也讓植物能挺立生長' },
+            { id: 'chloro', label: '葉綠體', emoji: '💚', reference: '沒有葉綠體', target: '有葉綠體，裡面含有葉綠素，能行光合作用', highlight: 'unique', summary: '葉綠體是植物最重要的特徵——讓植物能用陽光製造食物' },
+            { id: 'vacuole', label: '中央液泡', emoji: '💧', reference: '液泡很小或沒有', target: '有一個超大的中央液泡，佔細胞大部分空間', highlight: 'difference', summary: '中央液泡儲存水分和養分，也幫助維持細胞的形狀' },
+            { id: 'nucleus', label: '細胞核', emoji: '🟣', reference: '有細胞核，位在中央', target: '有細胞核，被液泡擠到旁邊', highlight: 'similar', summary: '都有細胞核，但植物細胞的核被大液泡推到邊邊去了' },
+            { id: 'mito', label: '粒線體', emoji: '🟠', reference: '有粒線體，產生能量', target: '也有粒線體，產生能量', highlight: 'similar', summary: '動物和植物細胞都有粒線體來產生能量' },
+          ],
+          funFact: '植物細胞的三大特徵：細胞壁 + 葉綠體 + 大液泡。記住這三個，就能分辨植物和動物細胞了！'
+        },
+        quiz: {
+          question: '下列何者是植物細胞有但動物細胞沒有的構造？',
+          options: [
+            '(A) 細胞核',
+            '(B) 粒線體',
+            '(C) 細胞壁和葉綠體',
+            '(D) 細胞膜'
+          ],
+          correctIndex: 2,
+          explanation: '細胞壁和葉綠體是植物細胞的專屬構造。細胞核、粒線體、細胞膜則是動物和植物細胞都有的。'
+        }
+      },
+      {
+        id: 'concept2',
+        title: '植物的四大分類',
         interactionType: 'clickExplore',
         content: {
-          title: '什麼是植物？',
-          instruction: '點擊了解植物界的共同特徵和分類方式！',
-          sceneEmoji: '🌱',
+          title: '植物界的四大家族',
+          instruction: '點擊了解四類植物的特徵，之後要挑戰分類遊戲！',
+          sceneEmoji: '🌿',
           items: [
-            { id: 'features', emoji: '🌿', label: '植物的共同點', info: { title: '植物界的特徵', description: '所有植物都是多細胞生物、有細胞壁、有葉綠素、會行光合作用。植物是「自營生物」，自己製造食物，不需要吃別人。植物不會移動，但會向光生長。', category: '基本特徵', categoryColor: 'green' }},
-            { id: 'vascular', emoji: '🚿', label: '維管束', info: { title: '植物的「水管系統」', description: '維管束就像植物體內的「水管」和「輸送帶」。它由木質部（往上送水分和礦物質）和韌皮部（往下送養分）組成。有維管束的植物可以長很高，沒有的就只能貼著地面長。', category: '分類依據', categoryColor: 'blue' }},
-            { id: 'seed', emoji: '🌰', label: '種子', info: { title: '有沒有種子？', description: '蘚苔和蕨類沒有種子，用孢子繁殖（孢子像超小的粉末，飄到適合的地方就能長成新植物）。裸子植物和被子植物有種子，種子裡面有胚和養分，比孢子更能保護後代。', category: '分類依據', categoryColor: 'amber' }},
-            { id: 'flower', emoji: '🌸', label: '花和果實', info: { title: '有沒有花？', description: '只有被子植物有花和果實。花負責繁殖（傳粉受精），果實保護種子並幫助散播。裸子植物有種子但沒有花和果實，種子是「裸露」的（通常在毬果裡面）。', category: '分類依據', categoryColor: 'pink' }},
-            { id: 'classify', emoji: '📊', label: '植物的分類', info: { title: '四大類植物', description: '植物界分成四大類：蘚苔植物（沒有維管束）→ 蕨類植物（有維管束、沒種子）→ 裸子植物（有種子、沒花果）→ 被子植物（有花有果實）。越後面的越進化、越複雜。', category: '分類', categoryColor: 'purple' }},
+            { id: 'moss', emoji: '🌱', label: '蘚苔植物', info: { title: '🌱 蘚苔——最簡單的植物', description: '蘚苔沒有維管束（沒有水管系統），水分只能靠細胞慢慢傳。所以長不高，只有幾公分。沒有真正的根（只有假根固定用），沒有種子（用孢子繁殖），精子需要水才能游到卵。代表：土馬騌、泥炭蘚。', category: '無維管束', categoryColor: 'green' }},
+            { id: 'fern', emoji: '🌿', label: '蕨類植物', info: { title: '🌿 蕨類——有水管的植物', description: '蕨類有維管束了！可以有效率地運水，所以能長很高（筆筒樹好幾公尺）。有真正的根莖葉。但還是沒有種子，用孢子繁殖（葉子背面的褐色圓點就是孢子囊）。精子仍然需要水。代表：筆筒樹、腎蕨、山蘇。', category: '有維管束、無種子', categoryColor: 'teal' }},
+            { id: 'gymno', emoji: '🌲', label: '裸子植物', info: { title: '🌲 裸子——有種子但沒花', description: '裸子植物有種子了！不再需要水來受精，靠風傳花粉。但種子是「裸露」的，沒有果實保護（通常在毬果裡）。不會開花。代表：松樹、柏樹、銀杏、蘇鐵。', category: '有種子、無花果', categoryColor: 'amber' }},
+            { id: 'angio', emoji: '🌸', label: '被子植物', info: { title: '🌸 被子——最進化的植物', description: '被子植物有花和果實，是最進化的一類。花吸引昆蟲或鳥來傳粉，果實包住種子幫助散播。分成單子葉（稻米、竹子，葉脈平行）和雙子葉（玫瑰、蘋果，葉脈網狀）。是地球上種類最多的植物！', category: '有花有果實', categoryColor: 'pink' }},
+            { id: 'compare', emoji: '📊', label: '演化比較', info: { title: '📊 從簡單到複雜', description: '蘚苔→蕨類→裸子→被子，越來越進化。關鍵進步：維管束（蕨類獲得）→ 種子（裸子獲得）→ 花和果實（被子獲得）。每一步都讓植物更能適應陸地環境。', category: '總整理', categoryColor: 'purple' }},
           ]
         },
         quiz: {
@@ -719,47 +1004,21 @@ export const units = [
         }
       },
       {
-        id: 'concept2',
-        title: '蘚苔植物',
-        interactionType: 'clickExplore',
-        content: {
-          title: '最簡單的植物——蘚苔',
-          instruction: '點擊了解蘚苔植物的特色！',
-          sceneEmoji: '🌱',
-          items: [
-            { id: 'no_vascular', emoji: '💧', label: '沒有維管束', info: { title: '沒有水管的植物', description: '蘚苔沒有維管束，水分只能靠細胞一個一個慢慢傳遞，速度很慢。所以蘚苔長不高，通常只有幾公分，都是貼著地面生長。它像是用毛巾吸水，而不是用水管送水。', category: '構造特徵', categoryColor: 'blue' }},
-            { id: 'no_root', emoji: '🌿', label: '假根', info: { title: '沒有真正的根', description: '蘚苔的根只是「假根」——看起來像根，但功能只是固定在地面或石頭上，不能吸收水分和礦物質。蘚苔吸水主要靠整個身體表面，所以它們喜歡待在潮濕的地方。', category: '構造特徵', categoryColor: 'green' }},
-            { id: 'spore', emoji: '✨', label: '孢子繁殖', info: { title: '用孢子散播後代', description: '蘚苔沒有種子，靠超小的「孢子」繁殖。孢子成熟後會從孢蒴（像小火柴棒的構造）彈出來，隨風飄到新的地方。落在潮濕處的孢子就能長成新的蘚苔。', category: '繁殖', categoryColor: 'amber' }},
-            { id: 'water', emoji: '🌧️', label: '需要水才能受精', info: { title: '離不開水', description: '蘚苔的精子必須在水中游泳才能找到卵。所以蘚苔一定要住在潮濕的地方，像是森林底部、石頭縫、溪邊等。這也是蘚苔不能住在乾燥地方的原因。', category: '繁殖', categoryColor: 'teal' }},
-            { id: 'example', emoji: '🏔️', label: '常見蘚苔', info: { title: '蘚苔在哪裡？', description: '土馬騌是常見的蘚。你在森林裡看到石頭上、樹幹上那層綠綠軟軟的東西，很多就是蘚苔。泥炭蘚可以吸收自己重量 20 倍的水，是天然的大海綿！', category: '生活例子', categoryColor: 'purple' }},
-          ]
-        },
-        quiz: {
-          question: '下列關於蘚苔植物的敘述何者正確？',
-          options: [
-            '(A) 蘚苔有維管束所以能長很高',
-            '(B) 蘚苔有真正的根可以吸水',
-            '(C) 蘚苔用孢子繁殖，且需要水才能受精',
-            '(D) 蘚苔有種子可以散播到遠方'
-          ],
-          correctIndex: 2,
-          explanation: '蘚苔沒有維管束也沒有真正的根，更沒有種子。它用孢子繁殖，而且精子必須在水裡游泳才能到達卵，所以蘚苔一定住在潮濕的地方。'
-        }
-      },
-      {
         id: 'concept3',
-        title: '蕨類植物',
-        interactionType: 'clickExplore',
+        title: '蘚苔 vs 蕨類',
+        interactionType: 'matchingPairs',
         content: {
-          title: '有維管束但沒種子——蕨類',
-          instruction: '點擊了解蕨類植物的特色！',
-          sceneEmoji: '🌿',
-          items: [
-            { id: 'vascular', emoji: '🚿', label: '有維管束', info: { title: '比蘚苔更進化', description: '蕨類有了維管束（植物的水管系統），可以有效率地輸送水分和養分，所以能長得比蘚苔高很多。有些樹蕨甚至可以長到好幾公尺高！維管束是蕨類比蘚苔更進化的關鍵。', category: '構造特徵', categoryColor: 'blue' }},
-            { id: 'true_parts', emoji: '🌱', label: '有真正的根莖葉', info: { title: '完整的器官', description: '蕨類有真正的根（能吸水和礦物質）、莖（大部分是地下莖）和葉（進行光合作用）。跟蘚苔的「假根假莖假葉」完全不同，蕨類是真材實料的！', category: '構造特徵', categoryColor: 'green' }},
-            { id: 'spore', emoji: '🟤', label: '孢子囊', info: { title: '葉子背面的圓點', description: '翻開蕨類的葉子，常常可以看到背面有很多褐色的小圓點，那就是「孢子囊堆」。裡面裝了滿滿的孢子，成熟後會彈出來隨風散播。有些人以為那是蟲卵，其實不是喔！', category: '繁殖', categoryColor: 'amber' }},
-            { id: 'water', emoji: '💧', label: '還是需要水', info: { title: '精子仍需游泳', description: '蕨類跟蘚苔一樣，精子需要水才能游到卵的地方完成受精。所以蕨類也比較喜歡待在潮濕的環境，像森林底部或瀑布旁邊。', category: '繁殖', categoryColor: 'teal' }},
-            { id: 'example', emoji: '🌿', label: '生活中的蕨類', info: { title: '常見蕨類植物', description: '筆筒樹是台灣常見的樹蕨，可以長到好幾公尺高。腎蕨常被用來當盆栽。山蘇花也是蕨類，鳥巢蕨的嫩葉可以吃（就是餐廳菜單上的「山蘇」）！台灣是蕨類的天堂，種類超過 600 種！', category: '生活例子', categoryColor: 'purple' }},
+          title: '蘚苔和蕨類誰有什麼？',
+          instruction: '把每個特徵拖到正確的植物類別！',
+          leftLabel: '特徵',
+          rightLabel: '植物',
+          pairs: [
+            { id: 'p1', left: { text: '沒有維管束', emoji: '❌' }, right: { text: '蘚苔植物', emoji: '🌱' }, explanation: '蘚苔沒有維管束，水分只能靠細胞慢慢傳，所以長不高' },
+            { id: 'p2', left: { text: '有維管束', emoji: '✅' }, right: { text: '蕨類植物', emoji: '🌿' }, explanation: '蕨類有維管束（水管系統），可以高效運水，所以能長很高' },
+            { id: 'p3', left: { text: '只有假根', emoji: '〰️' }, right: { text: '蘚苔植物', emoji: '🌱' }, explanation: '蘚苔的假根只能固定，不能吸水，整個身體表面吸水' },
+            { id: 'p4', left: { text: '有真正的根莖葉', emoji: '🌱' }, right: { text: '蕨類植物', emoji: '🌿' }, explanation: '蕨類有真正的根（吸水）、莖（輸送）、葉（光合作用）' },
+            { id: 'p5', left: { text: '葉背有孢子囊堆', emoji: '🟤' }, right: { text: '蕨類植物', emoji: '🌿' }, explanation: '蕨類葉子背面的褐色小圓點就是孢子囊堆，不是蟲卵喔！' },
+            { id: 'p6', left: { text: '有孢蒴', emoji: '📍' }, right: { text: '蘚苔植物', emoji: '🌱' }, explanation: '蘚苔的孢蒴像小火柴棒，成熟後彈出孢子隨風散播' },
           ]
         },
         quiz: {
@@ -771,16 +1030,102 @@ export const units = [
             '(D) 蕨類不需要水就能受精'
           ],
           correctIndex: 1,
-          explanation: '蕨類最大的進步就是有了維管束，讓它可以長更高、更有效率地運送水分。但蕨類還是沒有種子（用孢子繁殖），也不會開花，精子仍然需要水才能受精。'
+          explanation: '蕨類最大的進步就是有了維管束！但蕨類還是沒有種子、不會開花，精子仍然需要水才能受精。'
         }
       },
       {
         id: 'concept4',
-        title: '裸子植物與被子植物',
+        title: '裸子與被子教學',
+        interactionType: 'clickExplore',
+        content: {
+          title: '種子植物的兩大類',
+          instruction: '點擊了解裸子和被子植物的差異，等一下要挑戰分類！',
+          sceneEmoji: '🌳',
+          items: [
+            { id: 'gymno', emoji: '🌲', label: '裸子植物', info: { title: '裸子植物', description: '有種子但種子「裸露」，沒有果實包住。大部分種子藏在毬果裡（像松果）。不會開花，靠風傳粉。常見：松樹、柏樹、杉木、銀杏、蘇鐵。', category: '裸子植物', categoryColor: 'green' }},
+            { id: 'angio', emoji: '🌸', label: '被子植物', info: { title: '被子植物', description: '最進化的植物！有花（負責繁殖）和果實（保護種子、幫助散播）。靠風或動物傳粉。是地球上種類最多的植物。常見：玫瑰、稻米、蘋果、向日葵。', category: '被子植物', categoryColor: 'pink' }},
+            { id: 'mono', emoji: '🌾', label: '單子葉植物', info: { title: '被子植物——單子葉', description: '種子有一片子葉。特徵：葉脈平行、花瓣 3 的倍數、莖內維管束散生。常見：稻米、小麥、玉米、竹子、百合、蘭花。', category: '被子植物', categoryColor: 'amber' }},
+            { id: 'di', emoji: '🌻', label: '雙子葉植物', info: { title: '被子植物——雙子葉', description: '種子有兩片子葉。特徵：葉脈網狀、花瓣 4 或 5 的倍數、莖內維管束排成環狀。常見：玫瑰、向日葵、豆類、蘋果樹。', category: '被子植物', categoryColor: 'blue' }},
+            { id: 'no_water', emoji: '🌬️', label: '不再需要水', info: { title: '種子植物的大進步', description: '種子植物不需要水來幫精子游泳了！花粉靠風或動物傳送。這讓種子植物可以住在乾燥的地方，征服了整個陸地！這是比蕨類更進化的關鍵。', category: '演化意義', categoryColor: 'purple' }},
+          ]
+        },
+        quiz: {
+          question: '下列何者是單子葉和雙子葉植物的差異？',
+          options: [
+            '(A) 單子葉有種子，雙子葉沒有',
+            '(B) 單子葉葉脈平行，雙子葉葉脈網狀',
+            '(C) 單子葉沒有花，雙子葉有花',
+            '(D) 單子葉是裸子植物，雙子葉是被子植物'
+          ],
+          correctIndex: 1,
+          explanation: '單子葉和雙子葉都是被子植物（都有花）。最容易分辨的特徵：單子葉的葉脈是平行的（像稻葉），雙子葉的葉脈是網狀的（像楓葉）。'
+        }
+      },
+      {
+        id: 'concept5',
+        title: '種子植物的繁殖',
+        interactionType: 'clickExplore',
+        content: {
+          title: '種子植物怎麼繁殖？',
+          instruction: '點擊每個項目，了解種子植物如何不靠水就能繁殖後代！',
+          sceneEmoji: '🌸',
+          items: [
+            { id: 'pollen_tube', emoji: '🌾', label: '花粉管', info: { title: '花粉管——不需要水的秘密武器', description: '花粉落在柱頭上之後，會長出一條長長的「花粉管」，像一條隧道一樣，讓精細胞通過花粉管到達胚珠，完成受精。這樣就不需要水來幫精子游泳了！這是種子植物比蕨類更厲害的地方。', category: '繁殖構造', categoryColor: 'amber' }},
+            { id: 'ovule_seed', emoji: '🌰', label: '胚珠→種子', info: { title: '胚珠發育成種子', description: '受精之後，胚珠（裡面有受精卵）會慢慢發育成種子。種子裡面有小小的胚（未來的新植物）和養分，就像一個「植物寶寶的便當盒」，讓小植物有足夠的營養發芽長大。', category: '發育過程', categoryColor: 'green' }},
+            { id: 'ovary_fruit', emoji: '🍎', label: '子房→果實', info: { title: '子房發育成果實', description: '受精後，包在胚珠外面的子房會發育成果實。果實的功能是保護種子，還能幫助種子散播——有些果實好吃讓動物吃掉幫忙帶走種子，有些果實有翅膀可以飛。記住：是子房變果實，不是花粉管變果實喔！', category: '發育過程', categoryColor: 'red' }},
+            { id: 'cones', emoji: '🌲', label: '雌雄毬果', info: { title: '裸子植物的毬果', description: '裸子植物沒有花，但有毬果！雌毬果上有胚珠（等待受精），雄毬果會產生花粉（隨風飄散）。雌毬果和雄毬果不一定在同一棵樹上。松果就是雌毬果，裡面有種子，但沒有果實包住（所以叫裸子）。', category: '裸子植物', categoryColor: 'teal' }},
+            { id: 'why_dominate', emoji: '👑', label: '種子植物稱霸的原因', info: { title: '為什麼種子植物能稱霸陸地？', description: '兩個關鍵：第一，花粉管讓受精不再需要水，所以乾燥的地方也能繁殖。第二，種子有堅硬的外殼和養分，可以撐過惡劣環境等待好時機發芽。不像孢子那麼脆弱。有了這兩大武器，種子植物就征服了整個陸地！', category: '演化意義', categoryColor: 'purple' }},
+          ]
+        },
+        quiz: {
+          question: '受精後，下列何者會發育為果實？',
+          options: [
+            '(A) 花粉管',
+            '(B) 柱頭',
+            '(C) 子房',
+            '(D) 花瓣'
+          ],
+          correctIndex: 2,
+          explanation: '受精後，子房會發育成果實，胚珠會發育成種子。花粉管只是讓精細胞通過的通道，完成任務後就不會再發育了。記住：子房→果實，胚珠→種子！'
+        }
+      },
+      {
+        id: 'concept6',
+        title: '單子葉 vs 雙子葉',
+        interactionType: 'matchingPairs',
+        content: {
+          title: '單子葉和雙子葉配對',
+          instruction: '把每個特徵拖到正確的植物類別！記住這些特徵，考試很愛考喔！',
+          leftLabel: '特徵',
+          rightLabel: '植物類別',
+          pairs: [
+            { id: 'p1', left: { text: '葉脈平行', emoji: '📏' }, right: { text: '單子葉', emoji: '🌾' }, explanation: '單子葉植物的葉脈是平行排列的，像稻葉、竹葉' },
+            { id: 'p2', left: { text: '葉脈網狀', emoji: '🕸️' }, right: { text: '雙子葉', emoji: '🌻' }, explanation: '雙子葉植物的葉脈像網子一樣交錯，像楓葉、玫瑰葉' },
+            { id: 'p3', left: { text: '花瓣3的倍數', emoji: '3️⃣' }, right: { text: '單子葉', emoji: '🌾' }, explanation: '單子葉植物的花瓣數是3的倍數（3、6、9片），像百合花有6片花瓣' },
+            { id: 'p4', left: { text: '花瓣4或5的倍數', emoji: '5️⃣' }, right: { text: '雙子葉', emoji: '🌻' }, explanation: '雙子葉植物的花瓣數是4或5的倍數，像玫瑰花有5片花瓣' },
+            { id: 'p5', left: { text: '有形成層', emoji: '🔄' }, right: { text: '雙子葉', emoji: '🌻' }, explanation: '雙子葉植物的莖有形成層，可以不斷加粗長大，所以大樹幾乎都是雙子葉' },
+            { id: 'p6', left: { text: '維管束散生', emoji: '🔵' }, right: { text: '單子葉', emoji: '🌾' }, explanation: '單子葉植物的維管束像撒芝麻一樣散布在莖裡面，沒有排成環狀' },
+          ]
+        },
+        quiz: {
+          question: '形成層是哪類植物特有的構造？',
+          options: [
+            '(A) 蘚苔植物',
+            '(B) 蕨類植物',
+            '(C) 單子葉植物',
+            '(D) 雙子葉植物'
+          ],
+          correctIndex: 3,
+          explanation: '形成層是雙子葉植物特有的！形成層可以讓莖不斷加粗，所以能長成大樹。單子葉植物沒有形成層，維管束散生在莖裡面，所以竹子的莖不會越長越粗。'
+        }
+      },
+      {
+        id: 'concept7',
+        title: '植物分類大挑戰',
         interactionType: 'categorySort',
         content: {
           title: '把植物分到正確的類別！',
-          instruction: '拖拉每種植物到正確的分類！',
+          instruction: '運用所有學到的知識，把每種植物拖到正確的分類箱！',
           categories: [
             { id: 'bryophyte', name: '蘚苔植物', emoji: '🌱', color: 'green' },
             { id: 'fern', name: '蕨類植物', emoji: '🌿', color: 'teal' },
@@ -809,7 +1154,7 @@ export const units = [
             '(D) 裸子植物的種子被果實包住'
           ],
           correctIndex: 2,
-          explanation: '最大的差異就是被子植物有花和果實，裸子植物沒有。裸子植物的種子是「裸露」的（通常在毬果裡），而被子植物的種子被果實包住保護。兩者都有維管束和種子。'
+          explanation: '最大的差異就是被子植物有花和果實，裸子植物沒有。兩者都有維管束和種子。'
         }
       }
     ]
