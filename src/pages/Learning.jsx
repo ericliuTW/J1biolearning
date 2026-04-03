@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { units } from '../data/units'
-import { getStudentProgress, updateProgress, getSettings } from '../supabase'
+import { getStudentProgress, updateProgress, getSettings, resetUnitProgress } from '../supabase'
 import ProgressBar from '../components/ProgressBar'
 import DnaMutator from '../components/interactions/DnaMutator'
 import ClickExploreScene from '../components/interactions/ClickExploreScene'
@@ -17,6 +17,8 @@ import MatchingPairsGame from '../components/interactions/MatchingPairsGame'
 import SequenceOrderGame from '../components/interactions/SequenceOrderGame'
 import DichotomousKeyGame from '../components/interactions/DichotomousKeyGame'
 import CellCompareExplore from '../components/interactions/CellCompareExplore'
+import VirusExplore from '../components/interactions/VirusExplore'
+import PlantIllustrationExplore from '../components/interactions/PlantIllustrationExplore'
 import Quiz from '../components/Quiz'
 import Celebration from '../components/Celebration'
 
@@ -35,6 +37,8 @@ const interactionComponents = {
   sequenceOrder: SequenceOrderGame,
   dichotomousKey: DichotomousKeyGame,
   cellCompare: CellCompareExplore,
+  virusExplore: VirusExplore,
+  plantIllustration: PlantIllustrationExplore,
 }
 
 const PHASE = {
@@ -66,7 +70,13 @@ export default function Learning({ student }) {
         setCompletedConcepts(unitProgress)
 
         if (isRelearn) {
-          // Relearn mode: start from concept 1
+          // Relearn mode: reset progress and start from concept 1
+          try {
+            await resetUnitProgress(student.id, unitId, unit.concepts.map(c => c.id))
+          } catch (err) {
+            console.error('Failed to reset progress:', err)
+          }
+          setCompletedConcepts({})
           setCurrentConceptIndex(0)
           setAllDone(false)
           setPhase(PHASE.INTERACTION)
@@ -179,7 +189,13 @@ export default function Learning({ student }) {
                 </a>
               )}
               <button
-                onClick={() => {
+                onClick={async () => {
+                  try {
+                    await resetUnitProgress(student.id, unitId, unit.concepts.map(c => c.id))
+                  } catch (err) {
+                    console.error('Failed to reset progress:', err)
+                  }
+                  setCompletedConcepts({})
                   setAllDone(false)
                   setCurrentConceptIndex(0)
                   setPhase(PHASE.INTERACTION)
@@ -234,12 +250,7 @@ export default function Learning({ student }) {
                 onClick={() => {
                   if (!isLocked) {
                     setCurrentConceptIndex(idx)
-                    // In relearn mode, always start interaction
-                    if (isRelearn) {
-                      setPhase(PHASE.INTERACTION)
-                    } else {
-                      setPhase(isCompleted ? PHASE.CELEBRATION : PHASE.INTERACTION)
-                    }
+                    setPhase(PHASE.INTERACTION)
                   }
                 }}
                 className={`

@@ -634,19 +634,18 @@ export const units = [
       {
         id: 'concept8',
         title: '病毒',
-        interactionType: 'clickExplore',
+        interactionType: 'virusExplore',
         content: {
           title: '五界以外的怪東西——病毒',
-          instruction: '點擊探索病毒的構造、生存方式和常見病毒！',
-          sceneEmoji: '🦠',
-          items: [
-            { id: 'virus_struct', emoji: '🧬', label: '病毒的構造', info: { title: '🧬 病毒的構造超簡單', description: '病毒只有兩層：最裡面是一段遺傳物質（DNA 或 RNA），外面包著一層「蛋白質外殼」。有些病毒外面還有一層「套膜」（從宿主細胞偷來的）。它沒有細胞膜、沒有細胞質、沒有胞器，比細胞簡單太多了！就像一封只有信紙和信封的信，連房子都沒有。', category: '構造', categoryColor: 'red' }},
-            { id: 'virus_cycle', emoji: '🔄', label: '病毒怎麼繁殖？', info: { title: '🔄 入侵 → 複製 → 爆發', description: '病毒繁殖分四步：①附著在宿主細胞表面 → ②把自己的遺傳物質注入細胞裡 → ③利用細胞的工具大量複製自己 → ④新病毒太多，細胞被撐破，病毒跑出去感染更多細胞。整個過程就像壞人闖進工廠，強迫工人替自己做武器！', category: '生活史', categoryColor: 'orange' }},
-            { id: 'virus_not_life', emoji: '❓', label: '病毒是生物嗎？', info: { title: '❓ 五界以外的存在', description: '病毒不屬於五界中的任何一界！因為它：❌ 沒有細胞結構 ❌ 不能獨立代謝 ❌ 不能自行繁殖。但它 ✅ 有遺傳物質 ✅ 可以演化突變。所以科學家說病毒在「生物和非生物的邊界」，不算真正的生物。', category: '核心概念', categoryColor: 'purple' }},
-            { id: 'flu', emoji: '🤒', label: '流感病毒', info: { title: '🤒 流感病毒', description: '流感病毒讓你發燒、喉嚨痛、全身痠痛。它很會「變裝」——每年都會突變，所以每年都要打新的流感疫苗。流感病毒的外型像一顆長了很多突起的球，那些突起就是它用來「黏住」你的細胞的工具。', category: '常見病毒', categoryColor: 'blue' }},
-            { id: 'covid', emoji: '👑', label: '冠狀病毒', info: { title: '👑 冠狀病毒', description: 'COVID-19 的病原體。它的表面有很多「棘突蛋白」，看起來像皇冠，所以叫冠狀病毒。棘突蛋白就像鑰匙，能打開人體細胞表面的「鎖」（ACE2 受體），讓病毒跑進去。疫苗就是教你的免疫系統認識這把「鑰匙」。', category: '常見病毒', categoryColor: 'teal' }},
-            { id: 'phage', emoji: '🔬', label: '噬菌體', info: { title: '🔬 噬菌體——病毒也能當好人？', description: '噬菌體是專門攻擊「細菌」的病毒！它長得像一個登月小艇，有頭部（裝 DNA）和腳（用來附著在細菌上）。科學家正在研究用噬菌體來殺死抗藥性超級細菌，說不定以後噬菌體會成為新型的「抗生素」！', category: '常見病毒', categoryColor: 'green' }},
-          ]
+          instruction: '切換不同病毒類型，點擊各部位看圖解說明！還有繁殖過程動畫喔！',
+          virusData: true,
+          replicationSteps: [
+            { emoji: '📌', title: '步驟一：附著', description: '病毒表面的蛋白質突起就像「鑰匙」，找到細胞表面匹配的「鎖」（受體），然後牢牢黏上去。不同病毒認不同的鎖，所以流感病毒只感染呼吸道細胞，不會感染腸胃細胞。', visual: '🦠 ➜ 🔑 + 🔒 ➜ 🏠' },
+            { emoji: '💉', title: '步驟二：注入遺傳物質', description: '病毒把自己的 DNA 或 RNA 注入細胞裡面。有些病毒（像噬菌體）只注入遺傳物質，殼留在外面；有些病毒（像冠狀病毒）整個跑進細胞裡再脫殼。', visual: '🦠 ➜ 💉 ➜ 🧬進入細胞' },
+            { emoji: '🏭', title: '步驟三：大量複製', description: '病毒的遺傳物質「騎劫」了細胞的工廠，強迫細胞停下自己的工作，改成瘋狂複製病毒的零件（遺傳物質 + 蛋白質外殼），然後組裝成數百個新病毒。', visual: '🧬 ➜ 🏭 ➜ 🦠🦠🦠🦠🦠' },
+            { emoji: '💥', title: '步驟四：釋放（裂解）', description: '新病毒太多了，把細胞撐破（裂解）！數百個新病毒衝出來，各自去找新的細胞繼續感染。這就是為什麼感冒會越來越嚴重——病毒在你體內不斷倍增。', visual: '🏠💥 ➜ 🦠🦠🦠🦠 ➜ 感染更多細胞' },
+          ],
+          funFact: '病毒不屬於五界中的任何一界！因為它沒有細胞結構、不能獨立代謝、不能自行繁殖。但它有遺傳物質、會突變演化。科學家說病毒在「生物和非生物的邊界」，不算真正的生物。',
         },
         quiz: {
           question: '關於病毒，下列何者正確？',
@@ -907,12 +906,12 @@ export const units = [
         interactionType: 'categorySort',
         content: {
           title: '微生物扮演什麼角色？',
-          instruction: '把每個微生物拖到它在生態系中的角色！',
+          instruction: '微生物在自然界中扮演不同角色。「生產者」自己製造食物、「分解者」分解死掉的東西、「互利共生」跟其他生物互相幫助、「致病者」會讓人生病。把每個微生物拖到正確的角色！',
           categories: [
-            { id: 'producer', name: '生產者', emoji: '🌱', color: 'green' },
-            { id: 'decomposer', name: '分解者', emoji: '♻️', color: 'amber' },
-            { id: 'symbiosis', name: '互利共生', emoji: '🤝', color: 'blue' },
-            { id: 'pathogen', name: '致病者', emoji: '⚠️', color: 'red' },
+            { id: 'producer', name: '生產者（自己製造食物）', emoji: '🌱', color: 'green' },
+            { id: 'decomposer', name: '分解者（分解腐爛物質）', emoji: '♻️', color: 'amber' },
+            { id: 'symbiosis', name: '互利共生（跟其他生物合作）', emoji: '🤝', color: 'blue' },
+            { id: 'pathogen', name: '致病者（讓人生病）', emoji: '⚠️', color: 'red' },
           ],
           items: [
             { id: 'i1', text: '矽藻', emoji: '💎', categoryId: 'producer', explanation: '矽藻行光合作用，是海洋食物鏈的基礎，提供地球一半以上的氧氣' },
@@ -977,19 +976,11 @@ export const units = [
       },
       {
         id: 'concept2',
-        title: '植物的四大分類',
-        interactionType: 'clickExplore',
+        title: '植物的四大分類（圖解）',
+        interactionType: 'plantIllustration',
         content: {
           title: '植物界的四大家族',
-          instruction: '點擊了解四類植物的特徵，之後要挑戰分類遊戲！',
-          sceneEmoji: '🌿',
-          items: [
-            { id: 'moss', emoji: '🌱', label: '蘚苔植物', info: { title: '🌱 蘚苔——最簡單的植物', description: '蘚苔沒有維管束（沒有水管系統），水分只能靠細胞慢慢傳。所以長不高，只有幾公分。沒有真正的根（只有假根固定用），沒有種子（用孢子繁殖），精子需要水才能游到卵。代表：土馬騌、泥炭蘚。', category: '無維管束', categoryColor: 'green' }},
-            { id: 'fern', emoji: '🌿', label: '蕨類植物', info: { title: '🌿 蕨類——有水管的植物', description: '蕨類有維管束了！可以有效率地運水，所以能長很高（筆筒樹好幾公尺）。有真正的根莖葉。但還是沒有種子，用孢子繁殖（葉子背面的褐色圓點就是孢子囊）。精子仍然需要水。代表：筆筒樹、腎蕨、山蘇。', category: '有維管束、無種子', categoryColor: 'teal' }},
-            { id: 'gymno', emoji: '🌲', label: '裸子植物', info: { title: '🌲 裸子——有種子但沒花', description: '裸子植物有種子了！不再需要水來受精，靠風傳花粉。但種子是「裸露」的，沒有果實保護（通常在毬果裡）。不會開花。代表：松樹、柏樹、銀杏、蘇鐵。', category: '有種子、無花果', categoryColor: 'amber' }},
-            { id: 'angio', emoji: '🌸', label: '被子植物', info: { title: '🌸 被子——最進化的植物', description: '被子植物有花和果實，是最進化的一類。花吸引昆蟲或鳥來傳粉，果實包住種子幫助散播。分成單子葉（稻米、竹子，葉脈平行）和雙子葉（玫瑰、蘋果，葉脈網狀）。是地球上種類最多的植物！', category: '有花有果實', categoryColor: 'pink' }},
-            { id: 'compare', emoji: '📊', label: '演化比較', info: { title: '📊 從簡單到複雜', description: '蘚苔→蕨類→裸子→被子，越來越進化。關鍵進步：維管束（蕨類獲得）→ 種子（裸子獲得）→ 花和果實（被子獲得）。每一步都讓植物更能適應陸地環境。', category: '總整理', categoryColor: 'purple' }},
-          ]
+          instruction: '切換不同植物類型，點擊各部位看圖解說明！每種植物長什麼樣子、有什麼構造，一目了然。',
         },
         quiz: {
           question: '下列何者不是植物界的共同特徵？',
@@ -1006,19 +997,23 @@ export const units = [
       {
         id: 'concept3',
         title: '蘚苔 vs 蕨類',
-        interactionType: 'matchingPairs',
+        interactionType: 'categorySort',
         content: {
           title: '蘚苔和蕨類誰有什麼？',
-          instruction: '把每個特徵拖到正確的植物類別！',
-          leftLabel: '特徵',
-          rightLabel: '植物',
-          pairs: [
-            { id: 'p1', left: { text: '沒有維管束', emoji: '❌' }, right: { text: '蘚苔植物', emoji: '🌱' }, explanation: '蘚苔沒有維管束，水分只能靠細胞慢慢傳，所以長不高' },
-            { id: 'p2', left: { text: '有維管束', emoji: '✅' }, right: { text: '蕨類植物', emoji: '🌿' }, explanation: '蕨類有維管束（水管系統），可以高效運水，所以能長很高' },
-            { id: 'p3', left: { text: '只有假根', emoji: '〰️' }, right: { text: '蘚苔植物', emoji: '🌱' }, explanation: '蘚苔的假根只能固定，不能吸水，整個身體表面吸水' },
-            { id: 'p4', left: { text: '有真正的根莖葉', emoji: '🌱' }, right: { text: '蕨類植物', emoji: '🌿' }, explanation: '蕨類有真正的根（吸水）、莖（輸送）、葉（光合作用）' },
-            { id: 'p5', left: { text: '葉背有孢子囊堆', emoji: '🟤' }, right: { text: '蕨類植物', emoji: '🌿' }, explanation: '蕨類葉子背面的褐色小圓點就是孢子囊堆，不是蟲卵喔！' },
-            { id: 'p6', left: { text: '有孢蒴', emoji: '📍' }, right: { text: '蘚苔植物', emoji: '🌱' }, explanation: '蘚苔的孢蒴像小火柴棒，成熟後彈出孢子隨風散播' },
+          instruction: '蘚苔和蕨類都用孢子繁殖，但構造差很多！把每個特徵拖到正確的植物類別。小知識：「孢蒴」是蘚苔頂端像小火柴棒的構造，裡面裝著孢子，成熟後彈開散播。「孢子囊堆」是蕨類葉子背面的褐色小圓點，裡面也裝著孢子。',
+          categories: [
+            { id: 'moss', name: '蘚苔植物', emoji: '🌱', color: 'green' },
+            { id: 'fern', name: '蕨類植物', emoji: '🌿', color: 'teal' },
+          ],
+          items: [
+            { id: 'i1', text: '沒有維管束', emoji: '❌', categoryId: 'moss', explanation: '蘚苔沒有維管束（水管系統），水分只能靠細胞慢慢傳，所以長不高' },
+            { id: 'i2', text: '有維管束', emoji: '✅', categoryId: 'fern', explanation: '蕨類有維管束，可以高效運水和養分，所以能長很高' },
+            { id: 'i3', text: '只有假根（固定用）', emoji: '〰️', categoryId: 'moss', explanation: '蘚苔的假根只能固定在地面，不能真正吸水，靠整個身體表面吸水' },
+            { id: 'i4', text: '有真正的根莖葉', emoji: '🌿', categoryId: 'fern', explanation: '蕨類有真正的根（吸水）、莖（輸送）、葉（光合作用），構造比蘚苔完整' },
+            { id: 'i5', text: '葉背有孢子囊堆', emoji: '🟤', categoryId: 'fern', explanation: '蕨類葉子背面的褐色小圓點就是孢子囊堆，裡面裝滿孢子，不是蟲卵喔！' },
+            { id: 'i6', text: '有孢蒴（像小火柴棒）', emoji: '📍', categoryId: 'moss', explanation: '蘚苔頂端會長出像小火柴棒的「孢蒴」，裡面裝著孢子，成熟後彈開散播' },
+            { id: 'i7', text: '個體矮小（幾公分）', emoji: '📏', categoryId: 'moss', explanation: '因為沒有維管束，水分傳遞靠擴散，所以蘚苔只能長幾公分高' },
+            { id: 'i8', text: '可以長到好幾公尺', emoji: '🌲', categoryId: 'fern', explanation: '有了維管束的幫助，蕨類可以長很高，像筆筒樹就有好幾公尺！' },
           ]
         },
         quiz: {
@@ -1121,6 +1116,34 @@ export const units = [
       },
       {
         id: 'concept7',
+        title: '植物特徵總整理',
+        interactionType: 'clickExplore',
+        content: {
+          title: '四大類植物特徵總表',
+          instruction: '點擊每一類植物，複習它們有什麼、沒什麼！這是考前最重要的總整理！',
+          sceneEmoji: '📊',
+          items: [
+            { id: 'summary_moss', emoji: '🌱', label: '蘚苔植物', info: { title: '🌱 蘚苔植物特徵總整理', description: '✅ 有：細胞壁、葉綠素、孢子、假根、孢蒴\n❌ 沒有：維管束、真正的根莖葉、種子、花、果實\n🔑 關鍵：沒有維管束 → 長不高（幾公分）；精子需要水游泳\n📝 代表：土馬騌、地錢、泥炭蘚', category: '無維管束植物', categoryColor: 'green' }},
+            { id: 'summary_fern', emoji: '🌿', label: '蕨類植物', info: { title: '🌿 蕨類植物特徵總整理', description: '✅ 有：細胞壁、葉綠素、孢子、維管束、真正的根莖葉、孢子囊堆（在葉背）\n❌ 沒有：種子、花、果實\n🔑 關鍵：有維管束 → 可以長高；但精子仍需要水游泳\n📝 代表：筆筒樹、腎蕨、鳥巢蕨、山蘇', category: '有維管束、無種子', categoryColor: 'teal' }},
+            { id: 'summary_gymno', emoji: '🌲', label: '裸子植物', info: { title: '🌲 裸子植物特徵總整理', description: '✅ 有：細胞壁、葉綠素、維管束、根莖葉、種子、花粉、毬果\n❌ 沒有：花、果實（種子裸露）\n🔑 關鍵：有花粉管 → 不需要水受精；種子在毬果裡但沒有果實包住\n📝 代表：松樹、柏樹、銀杏、蘇鐵', category: '有種子、無花果', categoryColor: 'amber' }},
+            { id: 'summary_angio', emoji: '🌸', label: '被子植物', info: { title: '🌸 被子植物特徵總整理', description: '✅ 有：細胞壁、葉綠素、維管束、根莖葉、種子、花粉、花、果實\n❌ 全部都有！是最完整的植物\n🔑 關鍵：有花吸引動物傳粉（效率高）；果實保護種子並幫助散播\n📝 代表：玫瑰、稻米、向日葵、蘋果、竹子', category: '有花有果實', categoryColor: 'pink' }},
+            { id: 'summary_evolution', emoji: '📈', label: '演化順序記憶法', info: { title: '📈 演化順序與關鍵突破', description: '蘚苔 → 蕨類 → 裸子 → 被子\n\n每一步的關鍵突破：\n🌱→🌿 獲得「維管束」→ 可以長高\n🌿→🌲 獲得「種子＋花粉管」→ 不靠水繁殖\n🌲→🌸 獲得「花＋果實」→ 更有效傳粉和散播\n\n口訣：「苔蕨裸被，管種花果」\n（蘚苔→蕨類得到管，裸子得到種，被子得到花和果）', category: '總整理', categoryColor: 'purple' }},
+          ]
+        },
+        quiz: {
+          question: '下列哪一類植物有維管束但沒有種子？',
+          options: [
+            '(A) 蘚苔植物',
+            '(B) 蕨類植物',
+            '(C) 裸子植物',
+            '(D) 被子植物'
+          ],
+          correctIndex: 1,
+          explanation: '蕨類植物有維管束（所以能長高），但還沒有種子（用孢子繁殖）。蘚苔沒有維管束也沒有種子；裸子和被子都有維管束也有種子。'
+        }
+      },
+      {
+        id: 'concept8',
         title: '植物分類大挑戰',
         interactionType: 'categorySort',
         content: {
@@ -1134,15 +1157,15 @@ export const units = [
           ],
           items: [
             { id: 'i1', text: '土馬騌', emoji: '🌱', categoryId: 'bryophyte', explanation: '土馬騌是蘚苔植物，沒有維管束，用孢子繁殖' },
-            { id: 'i2', text: '泥炭蘚', emoji: '💧', categoryId: 'bryophyte', explanation: '泥炭蘚是蘚苔，能吸收自己重量 20 倍的水' },
+            { id: 'i2', text: '地錢', emoji: '💧', categoryId: 'bryophyte', explanation: '地錢是蘚苔植物，扁平狀貼在潮濕地面生長，沒有維管束' },
             { id: 'i3', text: '筆筒樹', emoji: '🌿', categoryId: 'fern', explanation: '筆筒樹是台灣常見的樹蕨，有維管束但沒種子' },
-            { id: 'i4', text: '腎蕨', emoji: '🍃', categoryId: 'fern', explanation: '腎蕨常被用來當盆栽，葉子背面有孢子囊堆' },
+            { id: 'i4', text: '鳥巢蕨', emoji: '🍃', categoryId: 'fern', explanation: '鳥巢蕨（山蘇）常見於森林中，有維管束，葉子背面有孢子囊堆' },
             { id: 'i5', text: '松樹', emoji: '🌲', categoryId: 'gymnosperm', explanation: '松樹是裸子植物，種子在毬果裡，沒有花和果實' },
             { id: 'i6', text: '銀杏', emoji: '🍂', categoryId: 'gymnosperm', explanation: '銀杏是活化石也是裸子植物，種子裸露沒有果實包住' },
             { id: 'i7', text: '玫瑰', emoji: '🌹', categoryId: 'angiosperm', explanation: '玫瑰是被子植物（雙子葉），有花有果實' },
             { id: 'i8', text: '稻米', emoji: '🌾', categoryId: 'angiosperm', explanation: '稻米是被子植物（單子葉），葉脈平行' },
-            { id: 'i9', text: '蘇鐵', emoji: '🌴', categoryId: 'gymnosperm', explanation: '蘇鐵是裸子植物，外型像棕櫚但其實是裸子植物' },
-            { id: 'i10', text: '向日葵', emoji: '🌻', categoryId: 'angiosperm', explanation: '向日葵是被子植物（雙子葉），有花有種子有果實' },
+            { id: 'i9', text: '蘇鐵', emoji: '🌴', categoryId: 'gymnosperm', explanation: '蘇鐵是裸子植物，外型像棕櫚但其實是裸子植物，不會開花' },
+            { id: 'i10', text: '大王椰子', emoji: '🌻', categoryId: 'angiosperm', explanation: '大王椰子是被子植物（單子葉），雖然看起來像棕櫚樹，但會開花結果' },
           ]
         },
         quiz: {

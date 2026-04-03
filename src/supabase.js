@@ -215,4 +215,27 @@ export async function deleteStudent(studentId) {
   if (error) throw error
 }
 
+// Reset all concept progress for a unit
+export async function resetUnitProgress(studentId, unitId, conceptIds) {
+  if (!isConfigured) return
+
+  const { data, error } = await supabase
+    .from('bio_students')
+    .select('progress')
+    .eq('id', studentId)
+    .single()
+
+  if (error) throw error
+
+  const progress = data.progress || {}
+  progress[unitId] = {}  // Reset entire unit progress
+
+  const { error: updateError } = await supabase
+    .from('bio_students')
+    .update({ progress })
+    .eq('id', studentId)
+
+  if (updateError) throw updateError
+}
+
 export { supabase }
