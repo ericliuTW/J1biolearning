@@ -137,7 +137,7 @@ export default function Login({ onLogin }) {
               type="text"
               value={classNum}
               onChange={(e) => setClassNum(e.target.value)}
-              placeholder="例：701"
+              placeholder="例：704"
               className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-400 focus:outline-none text-lg transition-colors"
             />
           </div>
