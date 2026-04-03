@@ -333,7 +333,7 @@ export const units = [
       {
         id: 'concept2',
         title: '從化石得到的資訊',
-        interactionType: 'fossilSortingGame',
+        interactionType: 'fossilSorting',
         content: {
           title: '化石能告訴我們什麼？',
           items: [
