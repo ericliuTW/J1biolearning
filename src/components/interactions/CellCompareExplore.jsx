@@ -4,17 +4,25 @@ import React, { useState, useCallback } from 'react';
 
 function AnimalCell({ highlightPart, size = 200 }) {
   const isHighlighted = (part) => highlightPart === part;
+  const hlStroke = (part, baseWidth = 1.5) => isHighlighted(part)
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glow)' }
+    : {};
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Cytoplasm - irregular blob shape */}
       <ellipse cx="100" cy="100" rx="85" ry="78"
         fill="#dbeafe" stroke="#60a5fa" strokeWidth="3"
         className={isHighlighted('membrane') ? 'animate-pulse' : ''}
+        {...hlStroke('membrane', 3)}
       />
       {/* Ribosomes - tiny dots */}
       {[[45,60],[155,70],[50,140],[140,145],[70,75],[130,80],[65,130],[135,125]].map(([x,y],i) => (
         <circle key={`r${i}`} cx={x} cy={y} r="2" fill="#94a3b8"
           className={isHighlighted('ribosome') ? 'animate-pulse' : ''}
+          {...(isHighlighted('ribosome') ? { r: 4, filter: 'url(#glow)' } : {})}
         />
       ))}
       {/* Mitochondria - orange ovals */}
@@ -23,18 +31,22 @@ function AnimalCell({ highlightPart, size = 200 }) {
           fill="#fdba74" stroke="#f97316" strokeWidth="1.5"
           transform={`rotate(${rot} ${cx} ${cy})`}
           className={isHighlighted('mitochondria') ? 'animate-pulse' : ''}
+          {...hlStroke('mitochondria')}
         />
       ))}
       {/* ER - wavy lines near nucleus */}
       <path d="M70 85 Q75 80 80 85 Q85 90 90 85" fill="none" stroke="#a78bfa" strokeWidth="1.5"
         className={isHighlighted('er') ? 'animate-pulse' : ''}
+        {...hlStroke('er')}
       />
       <path d="M72 92 Q77 87 82 92 Q87 97 92 92" fill="none" stroke="#a78bfa" strokeWidth="1.5"
         className={isHighlighted('er') ? 'animate-pulse' : ''}
+        {...hlStroke('er')}
       />
       {/* Nucleus */}
       <circle cx="100" cy="100" r="30" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2.5"
         className={isHighlighted('nucleus') ? 'animate-pulse' : ''}
+        {...hlStroke('nucleus', 2.5)}
       />
       {/* Nucleolus */}
       <circle cx="100" cy="100" r="10" fill="#8b5cf6"
@@ -44,44 +56,61 @@ function AnimalCell({ highlightPart, size = 200 }) {
       {[[92,90],[108,95],[95,110],[105,88]].map(([x,y],i) => (
         <circle key={`d${i}`} cx={x} cy={y} r="2" fill="#6d28d9"
           className={isHighlighted('dna') ? 'animate-pulse' : ''}
+          {...(isHighlighted('dna') ? { r: 4, filter: 'url(#glow)' } : {})}
         />
       ))}
       {/* Labels */}
-      <text x="100" y="18" textAnchor="middle" fontSize="9" fill="#334155" fontWeight="bold">細胞膜</text>
-      <line x1="100" y1="20" x2="100" y2="24" stroke="#334155" strokeWidth="0.8"/>
-      <text x="100" y="103" textAnchor="middle" fontSize="8" fill="#ffffff" fontWeight="bold">細胞核</text>
-      <text x="50" y="105" textAnchor="middle" fontSize="7" fill="#9a3412" fontWeight="bold">粒線體</text>
-      <text x="100" y="190" textAnchor="middle" fontSize="8" fill="#475569">細胞質</text>
+      <rect x="75" y="7" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="18" textAnchor="middle" fontSize="12" fill="#334155" fontWeight="bold">細胞膜</text>
+      <line x1="100" y1="21" x2="100" y2="24" stroke="#334155" strokeWidth="0.8"/>
+      <rect x="78" y="92" width="44" height="14" rx="3" fill="rgba(0,0,0,0.5)"/>
+      <text x="100" y="103" textAnchor="middle" fontSize="11" fill="#ffffff" fontWeight="bold">細胞核</text>
+      <rect x="24" y="94" width="52" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="50" y="105" textAnchor="middle" fontSize="10" fill="#9a3412" fontWeight="bold">粒線體</text>
+      <rect x="75" y="179" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="190" textAnchor="middle" fontSize="11" fill="#475569" fontWeight="bold">細胞質</text>
     </svg>
   );
 }
 
 function PlantCell({ highlightPart, size = 200 }) {
   const isHighlighted = (part) => highlightPart === part;
+  const hlStroke = (part, baseWidth = 1.5) => isHighlighted(part)
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glow)' }
+    : {};
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowPlant"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Cell wall - outer rectangle */}
       <rect x="10" y="10" width="180" height="180" rx="12" ry="12"
         fill="none" stroke="#16a34a" strokeWidth="5"
         className={isHighlighted('cell_wall') ? 'animate-pulse' : ''}
+        {...hlStroke('cell_wall', 5)}
       />
       {/* Cell membrane - inner rectangle */}
       <rect x="18" y="18" width="164" height="164" rx="8" ry="8"
         fill="#dbeafe" stroke="#60a5fa" strokeWidth="2"
         className={isHighlighted('membrane') ? 'animate-pulse' : ''}
+        {...hlStroke('membrane', 2)}
       />
       {/* Central vacuole - large light blue rect */}
       <rect x="50" y="55" width="100" height="90" rx="15" ry="15"
         fill="#bfdbfe" stroke="#3b82f6" strokeWidth="1.5" opacity="0.7"
         className={isHighlighted('vacuole') ? 'animate-pulse' : ''}
+        {...hlStroke('vacuole')}
       />
-      <text x="100" y="105" textAnchor="middle" fontSize="8" fill="#1e40af" fontWeight="bold">大液泡</text>
+      <rect x="78" y="94" width="44" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="105" textAnchor="middle" fontSize="11" fill="#1e40af" fontWeight="bold">大液泡</text>
       {/* Chloroplasts - bright green ovals */}
       {[[38,45,12,7,30],[160,50,11,6,-20],[35,155,12,7,-15],[162,155,11,6,25],[38,100,10,6,0]].map(([cx,cy,rx,ry,rot],i) => (
         <g key={`c${i}`} transform={`rotate(${rot} ${cx} ${cy})`}
           className={isHighlighted('chloroplast') ? 'animate-pulse' : ''}
         >
-          <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="#4ade80" stroke="#15803d" strokeWidth="1.5"/>
+          <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="#4ade80" stroke="#15803d" strokeWidth="1.5"
+            {...(isHighlighted('chloroplast') ? { stroke: '#facc15', strokeWidth: 3.5, filter: 'url(#glowPlant)' } : {})}
+          />
           <line x1={cx-rx+3} y1={cy} x2={cx+rx-3} y2={cy} stroke="#15803d" strokeWidth="0.8" opacity="0.5"/>
         </g>
       ))}
@@ -91,34 +120,48 @@ function PlantCell({ highlightPart, size = 200 }) {
           fill="#fdba74" stroke="#f97316" strokeWidth="1.5"
           transform={`rotate(${rot} ${cx} ${cy})`}
           className={isHighlighted('mitochondria') ? 'animate-pulse' : ''}
+          {...hlStroke('mitochondria')}
         />
       ))}
       {/* Nucleus */}
       <circle cx="100" cy="45" r="18" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2"
         className={isHighlighted('nucleus') ? 'animate-pulse' : ''}
+        {...hlStroke('nucleus', 2)}
       />
       <circle cx="100" cy="45" r="6" fill="#8b5cf6"/>
       {/* Labels */}
-      <text x="100" y="6" textAnchor="middle" fontSize="7" fill="#15803d" fontWeight="bold">細胞壁</text>
-      <text x="100" y="49" textAnchor="middle" fontSize="7" fill="#fff" fontWeight="bold">細胞核</text>
-      <text x="35" y="42" textAnchor="middle" fontSize="6" fill="#15803d" fontWeight="bold">葉綠體</text>
-      <text x="158" y="115" textAnchor="middle" fontSize="6" fill="#9a3412">粒線體</text>
+      <rect x="75" y="-4" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="6" textAnchor="middle" fontSize="10" fill="#15803d" fontWeight="bold">細胞壁</text>
+      <rect x="78" y="38" width="44" height="14" rx="3" fill="rgba(0,0,0,0.5)"/>
+      <text x="100" y="49" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="bold">細胞核</text>
+      <rect x="10" y="31" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="35" y="42" textAnchor="middle" fontSize="9" fill="#15803d" fontWeight="bold">葉綠體</text>
+      <rect x="132" y="104" width="52" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="158" y="115" textAnchor="middle" fontSize="9" fill="#9a3412" fontWeight="bold">粒線體</text>
     </svg>
   );
 }
 
 function BacteriaCell({ highlightPart, size = 200 }) {
   const isHighlighted = (part) => highlightPart === part;
+  const hlStroke = (part, baseWidth = 1.5) => isHighlighted(part)
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glowBact)' }
+    : {};
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowBact"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Flagella - wavy lines */}
       <path d="M170 100 Q180 85 190 100 Q200 115 210 100" fill="none" stroke="#a8a29e"
         strokeWidth="2" strokeLinecap="round"
         className={isHighlighted('flagella') ? 'animate-pulse' : ''}
+        {...hlStroke('flagella', 2)}
       />
       <path d="M170 110 Q182 95 192 110 Q202 125 212 108" fill="none" stroke="#a8a29e"
         strokeWidth="1.5" strokeLinecap="round"
         className={isHighlighted('flagella') ? 'animate-pulse' : ''}
+        {...hlStroke('flagella')}
       />
       {/* Pili - short hair-like lines */}
       {[[40,55],[35,70],[32,90],[35,120],[40,135],[160,60],[163,80],[160,130]].map(([x,y],i) => (
@@ -130,59 +173,80 @@ function BacteriaCell({ highlightPart, size = 200 }) {
       <ellipse cx="100" cy="100" rx="72" ry="52"
         fill="none" stroke="#16a34a" strokeWidth="4"
         className={isHighlighted('cell_wall') ? 'animate-pulse' : ''}
+        {...hlStroke('cell_wall', 4)}
       />
       {/* Cell membrane - inner capsule */}
       <ellipse cx="100" cy="100" rx="65" ry="45"
         fill="#fef3c7" stroke="#60a5fa" strokeWidth="2"
         className={isHighlighted('membrane') ? 'animate-pulse' : ''}
+        {...hlStroke('membrane', 2)}
       />
       {/* Nucleoid / DNA - tangled squiggly lines (NO nucleus!) */}
       <g className={isHighlighted('dna') || isHighlighted('nucleus') ? 'animate-pulse' : ''}>
         <path d="M80 95 Q85 82 95 90 Q105 98 100 85 Q95 75 105 80 Q115 85 110 95 Q105 105 115 100 Q120 95 115 108 Q110 118 100 112 Q90 106 85 115 Q80 108 80 95Z"
-          fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round"/>
+          fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round"
+          {...(isHighlighted('dna') || isHighlighted('nucleus') ? { stroke: '#facc15', strokeWidth: 4, filter: 'url(#glowBact)' } : {})}
+        />
       </g>
       {/* Ribosomes */}
       {[[60,85],[140,90],[65,115],[130,115],[75,95],[125,100],[80,120],[120,85],[90,115],[110,112]].map(([x,y],i) => (
         <circle key={`r${i}`} cx={x} cy={y} r="2" fill="#94a3b8"
           className={isHighlighted('ribosome') ? 'animate-pulse' : ''}
+          {...(isHighlighted('ribosome') ? { r: 4, filter: 'url(#glowBact)' } : {})}
         />
       ))}
       {/* Plasmid - small circular DNA */}
       <circle cx="130" cy="108" r="7" fill="none" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="2,1"
         className={isHighlighted('plasmid') ? 'animate-pulse' : ''}
+        {...hlStroke('plasmid')}
       />
       {/* Labels */}
-      <text x="100" y="38" textAnchor="middle" fontSize="7" fill="#15803d" fontWeight="bold">細胞壁</text>
-      <text x="100" y="170" textAnchor="middle" fontSize="7" fill="#dc2626" fontWeight="bold">擬核（DNA）</text>
-      <text x="22" y="100" textAnchor="middle" fontSize="6" fill="#475569">鞭毛</text>
-      <text x="142" y="122" fontSize="6" fill="#b45309">質體</text>
+      <rect x="75" y="27" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="38" textAnchor="middle" fontSize="10" fill="#15803d" fontWeight="bold">細胞壁</text>
+      <rect x="60" y="159" width="80" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="170" textAnchor="middle" fontSize="10" fill="#dc2626" fontWeight="bold">擬核（DNA）</text>
+      <rect x="4" y="89" width="36" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="22" y="100" textAnchor="middle" fontSize="9" fill="#475569" fontWeight="bold">鞭毛</text>
+      <rect x="130" y="111" width="36" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="148" y="122" textAnchor="middle" fontSize="9" fill="#b45309" fontWeight="bold">質體</text>
     </svg>
   );
 }
 
 function FungiCell({ highlightPart, size = 200 }) {
   const isHighlighted = (part) => highlightPart === part;
+  const hlStroke = (part, baseWidth = 1.5) => isHighlighted(part)
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glowFungi)' }
+    : {};
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowFungi"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Cell wall - outer rectangle (chitin) */}
       <rect x="10" y="10" width="180" height="180" rx="10" ry="10"
         fill="none" stroke="#ea580c" strokeWidth="5"
         className={isHighlighted('cell_wall') ? 'animate-pulse' : ''}
+        {...hlStroke('cell_wall', 5)}
       />
       {/* Cell membrane */}
       <rect x="18" y="18" width="164" height="164" rx="6" ry="6"
         fill="#fef3c7" stroke="#60a5fa" strokeWidth="2"
         className={isHighlighted('membrane') ? 'animate-pulse' : ''}
+        {...hlStroke('membrane', 2)}
       />
       {/* Vacuole - smaller than plant */}
       <ellipse cx="120" cy="120" rx="35" ry="28"
         fill="#bfdbfe" stroke="#3b82f6" strokeWidth="1.5" opacity="0.6"
         className={isHighlighted('vacuole') ? 'animate-pulse' : ''}
+        {...hlStroke('vacuole')}
       />
-      <text x="120" y="123" textAnchor="middle" fontSize="7" fill="#1e40af">液泡</text>
+      <rect x="100" y="112" width="40" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="120" y="123" textAnchor="middle" fontSize="10" fill="#1e40af" fontWeight="bold">液泡</text>
       {/* Nucleus */}
       <circle cx="80" cy="80" r="22" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2"
         className={isHighlighted('nucleus') ? 'animate-pulse' : ''}
+        {...hlStroke('nucleus', 2)}
       />
       <circle cx="80" cy="80" r="7" fill="#8b5cf6"/>
       {/* Mitochondria */}
@@ -191,6 +255,7 @@ function FungiCell({ highlightPart, size = 200 }) {
           fill="#fdba74" stroke="#f97316" strokeWidth="1.5"
           transform={`rotate(${rot} ${cx} ${cy})`}
           className={isHighlighted('mitochondria') ? 'animate-pulse' : ''}
+          {...hlStroke('mitochondria')}
         />
       ))}
       {/* Ribosomes */}
@@ -198,32 +263,45 @@ function FungiCell({ highlightPart, size = 200 }) {
         <circle key={`r${i}`} cx={x} cy={y} r="2" fill="#94a3b8"/>
       ))}
       {/* Labels */}
-      <text x="100" y="6" textAnchor="middle" fontSize="7" fill="#ea580c" fontWeight="bold">細胞壁（幾丁質）</text>
-      <text x="80" y="83" textAnchor="middle" fontSize="7" fill="#fff" fontWeight="bold">細胞核</text>
-      <text x="45" y="145" textAnchor="middle" fontSize="6" fill="#9a3412">粒線體</text>
+      <rect x="42" y="-4" width="116" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="6" textAnchor="middle" fontSize="10" fill="#ea580c" fontWeight="bold">細胞壁（幾丁質）</text>
+      <rect x="58" y="72" width="44" height="14" rx="3" fill="rgba(0,0,0,0.5)"/>
+      <text x="80" y="83" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="bold">細胞核</text>
+      <rect x="19" y="134" width="52" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="45" y="145" textAnchor="middle" fontSize="9" fill="#9a3412" fontWeight="bold">粒線體</text>
     </svg>
   );
 }
 
 function ProtistCell({ highlightPart, size = 200 }) {
   const isHighlighted = (part) => highlightPart === part;
+  const hlStroke = (part, baseWidth = 1.5) => isHighlighted(part)
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glowProt)' }
+    : {};
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowProt"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Amoeba-like body with pseudopods */}
       <path d="M60 70 Q30 50 25 80 Q20 110 40 130 Q50 145 70 155 Q90 165 110 160 Q130 155 150 145 Q170 130 175 110 Q180 85 165 70 Q150 50 130 55 Q115 45 100 50 Q80 45 60 70Z"
         fill="#ede9fe" stroke="#7c3aed" strokeWidth="2.5"
         className={isHighlighted('membrane') ? 'animate-pulse' : ''}
+        {...hlStroke('membrane', 2.5)}
       />
       {/* Pseudopods - extensions */}
       <path d="M25 80 Q10 75 5 85 Q8 95 20 100" fill="#ede9fe" stroke="#7c3aed" strokeWidth="2"
         className={isHighlighted('pseudopod') ? 'animate-pulse' : ''}
+        {...hlStroke('pseudopod', 2)}
       />
       <path d="M165 70 Q180 55 185 65 Q182 78 175 80" fill="#ede9fe" stroke="#7c3aed" strokeWidth="2"
         className={isHighlighted('pseudopod') ? 'animate-pulse' : ''}
+        {...hlStroke('pseudopod', 2)}
       />
       {/* Nucleus */}
       <circle cx="100" cy="100" r="22" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2"
         className={isHighlighted('nucleus') ? 'animate-pulse' : ''}
+        {...hlStroke('nucleus', 2)}
       />
       <circle cx="100" cy="100" r="7" fill="#8b5cf6"/>
       {/* Food vacuoles - multiple small circles */}
@@ -231,11 +309,13 @@ function ProtistCell({ highlightPart, size = 200 }) {
         <circle key={`fv${i}`} cx={cx} cy={cy} r={r}
           fill="#fbcfe8" stroke="#ec4899" strokeWidth="1" opacity="0.7"
           className={isHighlighted('vacuole') ? 'animate-pulse' : ''}
+          {...(isHighlighted('vacuole') ? { stroke: '#facc15', strokeWidth: 3, filter: 'url(#glowProt)' } : {})}
         />
       ))}
       {/* Contractile vacuole */}
       <circle cx="140" cy="130" r="10" fill="#bfdbfe" stroke="#2563eb" strokeWidth="1.5"
         className={isHighlighted('vacuole') ? 'animate-pulse' : ''}
+        {...hlStroke('vacuole')}
       />
       {/* Mitochondria */}
       {[[70,75,9,5,20],[130,120,8,4,-15]].map(([cx,cy,rx,ry,rot],i) => (
@@ -243,35 +323,49 @@ function ProtistCell({ highlightPart, size = 200 }) {
           fill="#fdba74" stroke="#f97316" strokeWidth="1.5"
           transform={`rotate(${rot} ${cx} ${cy})`}
           className={isHighlighted('mitochondria') ? 'animate-pulse' : ''}
+          {...hlStroke('mitochondria')}
         />
       ))}
       {/* Labels */}
-      <text x="100" y="103" textAnchor="middle" fontSize="7" fill="#fff" fontWeight="bold">細胞核</text>
-      <text x="60" y="108" textAnchor="middle" fontSize="6" fill="#be185d">食泡</text>
-      <text x="15" y="72" textAnchor="middle" fontSize="6" fill="#6d28d9">偽足</text>
-      <text x="140" y="145" textAnchor="middle" fontSize="6" fill="#1e40af">伸縮泡</text>
+      <rect x="78" y="92" width="44" height="14" rx="3" fill="rgba(0,0,0,0.5)"/>
+      <text x="100" y="103" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="bold">細胞核</text>
+      <rect x="40" y="97" width="40" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="60" y="108" textAnchor="middle" fontSize="9" fill="#be185d" fontWeight="bold">食泡</text>
+      <rect x="-2" y="61" width="34" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="15" y="72" textAnchor="middle" fontSize="9" fill="#6d28d9" fontWeight="bold">偽足</text>
+      <rect x="114" y="147" width="52" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="140" y="158" textAnchor="middle" fontSize="9" fill="#1e40af" fontWeight="bold">伸縮泡</text>
     </svg>
   );
 }
 
 function AlgaeCell({ highlightPart, size = 200 }) {
   const isHighlighted = (part) => highlightPart === part;
+  const hlStroke = (part, baseWidth = 1.5) => isHighlighted(part)
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glowAlgae)' }
+    : {};
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowAlgae"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Cell wall - thin green */}
       <ellipse cx="100" cy="100" rx="85" ry="75"
         fill="none" stroke="#16a34a" strokeWidth="3"
         className={isHighlighted('cell_wall') ? 'animate-pulse' : ''}
+        {...hlStroke('cell_wall', 3)}
       />
       {/* Cell membrane */}
       <ellipse cx="100" cy="100" rx="80" ry="70"
         fill="#dcfce7" stroke="#60a5fa" strokeWidth="1.5"
         className={isHighlighted('membrane') ? 'animate-pulse' : ''}
+        {...hlStroke('membrane')}
       />
       {/* Large chloroplast - cup-shaped */}
       <path d="M40 70 Q35 100 40 140 Q60 160 100 160 Q140 160 160 140 Q165 100 160 70 Q140 90 100 95 Q60 90 40 70Z"
         fill="#4ade80" stroke="#15803d" strokeWidth="2" opacity="0.7"
         className={isHighlighted('chloroplast') ? 'animate-pulse' : ''}
+        {...hlStroke('chloroplast', 2)}
       />
       {/* Pyrenoid inside chloroplast */}
       <circle cx="100" cy="140" r="10" fill="#15803d" opacity="0.5"
@@ -280,17 +374,23 @@ function AlgaeCell({ highlightPart, size = 200 }) {
       {/* Nucleus */}
       <circle cx="100" cy="75" r="18" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2"
         className={isHighlighted('nucleus') ? 'animate-pulse' : ''}
+        {...hlStroke('nucleus', 2)}
       />
       <circle cx="100" cy="75" r="6" fill="#8b5cf6"/>
       {/* Eyespot */}
       <circle cx="55" cy="80" r="5" fill="#ef4444"
         className={isHighlighted('eyespot') ? 'animate-pulse' : ''}
+        {...(isHighlighted('eyespot') ? { r: 7, filter: 'url(#glowAlgae)' } : {})}
       />
       {/* Labels */}
-      <text x="100" y="18" textAnchor="middle" fontSize="7" fill="#15803d" fontWeight="bold">細胞壁</text>
-      <text x="100" y="78" textAnchor="middle" fontSize="7" fill="#fff" fontWeight="bold">細胞核</text>
-      <text x="100" y="125" textAnchor="middle" fontSize="8" fill="#15803d" fontWeight="bold">葉綠體</text>
-      <text x="45" y="72" fontSize="6" fill="#dc2626">眼點</text>
+      <rect x="75" y="7" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="18" textAnchor="middle" fontSize="10" fill="#15803d" fontWeight="bold">細胞壁</text>
+      <rect x="78" y="67" width="44" height="14" rx="3" fill="rgba(0,0,0,0.5)"/>
+      <text x="100" y="78" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="bold">細胞核</text>
+      <rect x="75" y="114" width="50" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="125" textAnchor="middle" fontSize="11" fill="#15803d" fontWeight="bold">葉綠體</text>
+      <rect x="26" y="61" width="38" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="45" y="72" fontSize="9" fill="#dc2626" fontWeight="bold">眼點</text>
     </svg>
   );
 }
@@ -416,7 +516,7 @@ export default function CellCompareExplore({ content, onComplete }) {
                 <CellDiagram
                   type={referenceCell.type}
                   highlightPart={activeComparison?.id}
-                  size={190}
+                  size={220}
                 />
               </div>
             </div>
@@ -437,7 +537,7 @@ export default function CellCompareExplore({ content, onComplete }) {
                 <CellDiagram
                   type={targetCell.type}
                   highlightPart={activeComparison?.id}
-                  size={190}
+                  size={220}
                 />
               </div>
             </div>

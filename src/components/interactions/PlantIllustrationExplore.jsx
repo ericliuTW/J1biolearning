@@ -4,22 +4,28 @@ import React, { useState, useCallback } from 'react';
 
 function MossPlant({ highlight, size = 180 }) {
   const hl = (part) => highlight === part ? 'animate-pulse' : '';
+  const hlStroke = (part, baseWidth = 1.5) => highlight === part
+    ? { stroke: '#facc15', strokeWidth: baseWidth + 2, filter: 'url(#glowMoss)' }
+    : {};
   return (
     <svg viewBox="0 0 200 240" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowMoss"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Ground / soil line */}
       <rect x="0" y="180" width="200" height="60" fill="#8B6914" rx="4" opacity="0.3" />
       <line x1="0" y1="180" x2="200" y2="180" stroke="#92400e" strokeWidth="2" />
 
       {/* Rhizoids (假根) - thin threads at bottom */}
-      <g className={hl('rhizoids')}>
+      <g className={hl('rhizoids')} {...(highlight === 'rhizoids' ? { filter: 'url(#glowMoss)' } : {})}>
         {[[50,180,45,210],[60,180,55,205],[70,180,72,208],[90,180,85,212],
           [100,180,105,207],[110,180,108,210],[120,180,125,205],[140,180,138,210]].map(([x1,y1,x2,y2],i) => (
-          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#a3e635" strokeWidth="1" opacity="0.7" />
+          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={highlight === 'rhizoids' ? '#facc15' : '#a3e635'} strokeWidth={highlight === 'rhizoids' ? 2.5 : 1} opacity="0.9" />
         ))}
       </g>
 
       {/* Moss clump - fuzzy green mound */}
-      <g className={hl('body')}>
+      <g className={hl('body')} {...(highlight === 'body' ? { filter: 'url(#glowMoss)' } : {})}>
         <ellipse cx="70" cy="172" rx="30" ry="14" fill="#4ade80" opacity="0.8" />
         <ellipse cx="100" cy="168" rx="28" ry="16" fill="#22c55e" opacity="0.85" />
         <ellipse cx="130" cy="174" rx="25" ry="12" fill="#4ade80" opacity="0.8" />
@@ -31,33 +37,43 @@ function MossPlant({ highlight, size = 180 }) {
       </g>
 
       {/* Sporangium (孢蒴) on thin stalks */}
-      <g className={hl('sporangium')}>
+      <g className={hl('sporangium')} {...(highlight === 'sporangium' ? { filter: 'url(#glowMoss)' } : {})}>
         <line x1="80" y1="155" x2="78" y2="100" stroke="#a16207" strokeWidth="1.5" />
-        <ellipse cx="78" cy="95" rx="5" ry="8" fill="#ca8a04" stroke="#a16207" strokeWidth="1" />
+        <ellipse cx="78" cy="95" rx="5" ry="8" fill="#ca8a04" stroke="#a16207" strokeWidth="1"
+          {...hlStroke('sporangium', 1)}
+        />
         <line x1="100" y1="150" x2="102" y2="85" stroke="#a16207" strokeWidth="1.5" />
-        <ellipse cx="102" cy="80" rx="5" ry="8" fill="#ca8a04" stroke="#a16207" strokeWidth="1" />
+        <ellipse cx="102" cy="80" rx="5" ry="8" fill="#ca8a04" stroke="#a16207" strokeWidth="1"
+          {...hlStroke('sporangium', 1)}
+        />
         <line x1="115" y1="156" x2="120" y2="108" stroke="#a16207" strokeWidth="1.5" />
-        <ellipse cx="120" cy="103" rx="5" ry="8" fill="#ca8a04" stroke="#a16207" strokeWidth="1" />
+        <ellipse cx="120" cy="103" rx="5" ry="8" fill="#ca8a04" stroke="#a16207" strokeWidth="1"
+          {...hlStroke('sporangium', 1)}
+        />
       </g>
 
       {/* No vascular bundle indicator */}
-      <g className={hl('noVascular')}>
+      <g className={hl('noVascular')} {...(highlight === 'noVascular' ? { filter: 'url(#glowMoss)' } : {})}>
         <line x1="155" y1="140" x2="175" y2="140" stroke="#ef4444" strokeWidth="2" />
         <line x1="155" y1="150" x2="175" y2="150" stroke="#ef4444" strokeWidth="2" />
         <line x1="152" y1="135" x2="178" y2="155" stroke="#ef4444" strokeWidth="3" opacity="0.7" />
       </g>
 
       {/* Labels */}
-      <text x="78" y="72" textAnchor="middle" fontSize="9" fill="#a16207" fontWeight="bold">&#x1F4A7; &#x5B62;&#x84F4;</text>
-      <text x="100" y="232" textAnchor="middle" fontSize="9" fill="#65a30d" fontWeight="bold">&#x5047;&#x6839;</text>
-      <text x="165" y="132" textAnchor="middle" fontSize="8" fill="#ef4444" fontWeight="bold">&#x7121;&#x7DAD;&#x7BA1;&#x675F;</text>
+      <rect x="40" y="59" width="76" height="16" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="78" y="72" textAnchor="middle" fontSize="12" fill="#a16207" fontWeight="bold">&#x1F4A7; &#x5B62;&#x84F4;</text>
+      <rect x="75" y="220" width="50" height="16" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="232" textAnchor="middle" fontSize="12" fill="#65a30d" fontWeight="bold">&#x5047;&#x6839;</text>
+      <rect x="120" y="119" width="90" height="16" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="165" y="132" textAnchor="middle" fontSize="11" fill="#ef4444" fontWeight="bold">&#x7121;&#x7DAD;&#x7BA1;&#x675F;</text>
 
       {/* Height indicator */}
       <g className={hl('height')}>
         <line x1="20" y1="150" x2="20" y2="180" stroke="#64748b" strokeWidth="1" strokeDasharray="3,2" />
         <line x1="15" y1="150" x2="25" y2="150" stroke="#64748b" strokeWidth="1" />
         <line x1="15" y1="180" x2="25" y2="180" stroke="#64748b" strokeWidth="1" />
-        <text x="22" y="168" textAnchor="middle" fontSize="7" fill="#64748b">&#x5E7E;cm</text>
+        <rect x="4" y="158" width="36" height="14" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="22" y="168" textAnchor="middle" fontSize="10" fill="#64748b" fontWeight="bold">&#x5E7E;cm</text>
       </g>
     </svg>
   );
@@ -65,36 +81,40 @@ function MossPlant({ highlight, size = 180 }) {
 
 function FernPlant({ highlight, size = 180 }) {
   const hl = (part) => highlight === part ? 'animate-pulse' : '';
+  const hlFilter = (part) => highlight === part ? { filter: 'url(#glowFern)' } : {};
   return (
     <svg viewBox="0 0 200 240" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowFern"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Ground */}
       <rect x="0" y="185" width="200" height="55" fill="#8B6914" rx="4" opacity="0.3" />
       <line x1="0" y1="185" x2="200" y2="185" stroke="#92400e" strokeWidth="2" />
 
       {/* Roots from rhizome */}
-      <g className={hl('roots')}>
+      <g className={hl('roots')} {...hlFilter('roots')}>
         {[[70,200,50,225],[80,200,65,230],[90,200,80,228],[110,200,120,230],[120,200,135,225],[130,200,145,228]].map(([x1,y1,x2,y2],i) => (
           <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#92400e" strokeWidth="2" />
         ))}
       </g>
 
       {/* Underground rhizome (根莖) */}
-      <g className={hl('rhizome')}>
+      <g className={hl('rhizome')} {...hlFilter('rhizome')}>
         <path d="M50 198 Q80 195 100 198 Q120 201 150 198" fill="none" stroke="#65a30d" strokeWidth="5" strokeLinecap="round" />
       </g>
 
       {/* Main stem / stipe */}
-      <g className={hl('stem')}>
+      <g className={hl('stem')} {...hlFilter('stem')}>
         <line x1="100" y1="195" x2="100" y2="80" stroke="#15803d" strokeWidth="4" />
       </g>
 
       {/* Fiddlehead at top */}
-      <g className={hl('fiddlehead')}>
+      <g className={hl('fiddlehead')} {...hlFilter('fiddlehead')}>
         <path d="M100 80 Q100 60 110 50 Q120 42 118 55 Q115 65 108 68" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" />
       </g>
 
       {/* Compound fronds - left side */}
-      <g className={hl('fronds')}>
+      <g className={hl('fronds')} {...hlFilter('fronds')}>
         {[
           [100,100, 35,75], [100,115, 30,95], [100,130, 35,115], [100,145, 40,135], [100,160, 45,152],
           [100,100, 165,75], [100,115, 170,95], [100,130, 165,115], [100,145, 160,135], [100,160, 155,152],
@@ -114,33 +134,42 @@ function FernPlant({ highlight, size = 180 }) {
       </g>
 
       {/* Sporangia dots on leaf undersides (孢子囊堆) */}
-      <g className={hl('sporangia')}>
+      <g className={hl('sporangia')} {...hlFilter('sporangia')}>
         {[[45,82],[38,100],[162,82],[167,100],[42,120],[158,120]].map(([x,y],i) => (
           <circle key={i} cx={x} cy={y} r="3" fill="#92400e" opacity="0.8" />
         ))}
       </g>
 
       {/* Vascular bundle indicator */}
-      <g className={hl('vascular')}>
+      <g className={hl('vascular')} {...hlFilter('vascular')}>
         <rect x="96" y="130" width="8" height="20" fill="none" stroke="#0ea5e9" strokeWidth="1.5" rx="2" />
         <line x1="98" y1="132" x2="98" y2="148" stroke="#0ea5e9" strokeWidth="1" />
         <line x1="102" y1="132" x2="102" y2="148" stroke="#0ea5e9" strokeWidth="1" />
       </g>
 
       {/* Labels */}
-      <text x="120" y="45" fontSize="8" fill="#15803d" fontWeight="bold">&#x5377;&#x65CB;&#x82BD;</text>
-      <text x="30" y="70" fontSize="8" fill="#92400e" fontWeight="bold">&#x5B62;&#x5B50;&#x56CA;&#x5806;</text>
-      <text x="100" y="236" textAnchor="middle" fontSize="8" fill="#92400e" fontWeight="bold">&#x6839;</text>
-      <text x="68" y="200" fontSize="8" fill="#65a30d" fontWeight="bold">&#x6839;&#x8396;</text>
-      <text x="120" y="145" fontSize="7" fill="#0ea5e9" fontWeight="bold">&#x7DAD;&#x7BA1;&#x675F;</text>
+      <rect x="115" y="33" width="56" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="143" y="45" textAnchor="middle" fontSize="11" fill="#15803d" fontWeight="bold">&#x5377;&#x65CB;&#x82BD;</text>
+      <rect x="10" y="58" width="76" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="48" y="70" textAnchor="middle" fontSize="11" fill="#92400e" fontWeight="bold">&#x5B62;&#x5B50;&#x56CA;&#x5806;</text>
+      <rect x="82" y="224" width="36" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="236" textAnchor="middle" fontSize="11" fill="#92400e" fontWeight="bold">&#x6839;</text>
+      <rect x="63" y="188" width="44" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="85" y="200" textAnchor="middle" fontSize="11" fill="#65a30d" fontWeight="bold">&#x6839;&#x8396;</text>
+      <rect x="115" y="133" width="56" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="143" y="145" textAnchor="middle" fontSize="10" fill="#0ea5e9" fontWeight="bold">&#x7DAD;&#x7BA1;&#x675F;</text>
     </svg>
   );
 }
 
 function GymnoPlant({ highlight, size = 180 }) {
   const hl = (part) => highlight === part ? 'animate-pulse' : '';
+  const hlFilter = (part) => highlight === part ? { filter: 'url(#glowGymno)' } : {};
   return (
     <svg viewBox="0 0 200 240" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowGymno"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Ground */}
       <rect x="0" y="195" width="200" height="45" fill="#8B6914" rx="4" opacity="0.3" />
       <line x1="0" y1="195" x2="200" y2="195" stroke="#92400e" strokeWidth="2" />
@@ -149,7 +178,7 @@ function GymnoPlant({ highlight, size = 180 }) {
       <rect x="93" y="130" width="14" height="70" fill="#92400e" rx="2" />
 
       {/* Triangle tree shape with needle leaves */}
-      <g className={hl('leaves')}>
+      <g className={hl('leaves')} {...hlFilter('leaves')}>
         <polygon points="100,20 45,120 155,120" fill="#15803d" stroke="#166534" strokeWidth="2" />
         <polygon points="100,45 55,135 145,135" fill="#16a34a" stroke="#166534" strokeWidth="1.5" />
         <polygon points="100,70 60,150 140,150" fill="#22c55e" stroke="#166534" strokeWidth="1.5" />
@@ -160,7 +189,7 @@ function GymnoPlant({ highlight, size = 180 }) {
       </g>
 
       {/* Male cones (雄毬果) - small, near branch tips */}
-      <g className={hl('maleCone')}>
+      <g className={hl('maleCone')} {...hlFilter('maleCone')}>
         <ellipse cx="65" cy="130" rx="6" ry="4" fill="#fbbf24" stroke="#d97706" strokeWidth="1" />
         <ellipse cx="135" cy="128" rx="6" ry="4" fill="#fbbf24" stroke="#d97706" strokeWidth="1" />
         {/* Pollen dots */}
@@ -170,29 +199,33 @@ function GymnoPlant({ highlight, size = 180 }) {
       </g>
 
       {/* Female cone (雌毬果) - larger, on tree */}
-      <g className={hl('femaleCone')}>
+      <g className={hl('femaleCone')} {...hlFilter('femaleCone')}>
         <path d="M100 95 L90 115 L110 115 Z" fill="#b45309" stroke="#92400e" strokeWidth="1.5" />
         <line x1="95" y1="105" x2="105" y2="105" stroke="#78350f" strokeWidth="1" />
         <line x1="93" y1="110" x2="107" y2="110" stroke="#78350f" strokeWidth="1" />
       </g>
 
       {/* Naked seed indicator */}
-      <g className={hl('nakedSeed')}>
+      <g className={hl('nakedSeed')} {...hlFilter('nakedSeed')}>
         <circle cx="165" cy="100" r="5" fill="#fbbf24" stroke="#d97706" strokeWidth="1" />
-        <text x="165" y="103" textAnchor="middle" fontSize="6" fill="#78350f" fontWeight="bold">&#x7A2E;</text>
+        <text x="165" y="103" textAnchor="middle" fontSize="9" fill="#78350f" fontWeight="bold">&#x7A2E;</text>
       </g>
 
       {/* No flower indicator */}
-      <g className={hl('noFlower')}>
-        <text x="170" y="65" textAnchor="middle" fontSize="7" fill="#ef4444">&#x2716; &#x7121;&#x82B1;</text>
-        <text x="170" y="78" textAnchor="middle" fontSize="7" fill="#ef4444">&#x2716; &#x7121;&#x679C;&#x5BE6;</text>
+      <g className={hl('noFlower')} {...hlFilter('noFlower')}>
+        <text x="170" y="65" textAnchor="middle" fontSize="10" fill="#ef4444" fontWeight="bold">&#x2716; &#x7121;&#x82B1;</text>
+        <text x="170" y="78" textAnchor="middle" fontSize="10" fill="#ef4444" fontWeight="bold">&#x2716; &#x7121;&#x679C;&#x5BE6;</text>
       </g>
 
       {/* Labels */}
-      <text x="55" y="145" fontSize="8" fill="#d97706" fontWeight="bold">&#x2642; &#x96C4;&#x6BC6;&#x679C;</text>
-      <text x="105" y="92" fontSize="8" fill="#92400e" fontWeight="bold">&#x2640; &#x96CC;&#x6BC6;&#x679C;</text>
-      <text x="165" y="115" textAnchor="middle" fontSize="7" fill="#d97706" fontWeight="bold">&#x7A2E;&#x5B50;(&#x88F8;&#x9732;)</text>
-      <text x="100" y="17" textAnchor="middle" fontSize="8" fill="#15803d" fontWeight="bold">&#x91DD;&#x8449;</text>
+      <rect x="30" y="133" width="90" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="75" y="145" textAnchor="middle" fontSize="11" fill="#d97706" fontWeight="bold">&#x2642; &#x96C4;&#x6BC6;&#x679C;</text>
+      <rect x="100" y="80" width="86" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="143" y="92" textAnchor="middle" fontSize="11" fill="#92400e" fontWeight="bold">&#x2640; &#x96CC;&#x6BC6;&#x679C;</text>
+      <rect x="118" y="103" width="94" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="165" y="115" textAnchor="middle" fontSize="10" fill="#d97706" fontWeight="bold">&#x7A2E;&#x5B50;(&#x88F8;&#x9732;)</text>
+      <rect x="75" y="5" width="50" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="17" textAnchor="middle" fontSize="11" fill="#15803d" fontWeight="bold">&#x91DD;&#x8449;</text>
 
       {/* Roots */}
       <g>
@@ -206,8 +239,12 @@ function GymnoPlant({ highlight, size = 180 }) {
 
 function AngioPlant({ highlight, size = 180 }) {
   const hl = (part) => highlight === part ? 'animate-pulse' : '';
+  const hlFilter = (part) => highlight === part ? { filter: 'url(#glowAngio)' } : {};
   return (
     <svg viewBox="0 0 200 240" width={size} height={size} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowAngio"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Ground */}
       <rect x="0" y="195" width="200" height="45" fill="#8B6914" rx="4" opacity="0.3" />
       <line x1="0" y1="195" x2="200" y2="195" stroke="#92400e" strokeWidth="2" />
@@ -226,7 +263,7 @@ function AngioPlant({ highlight, size = 180 }) {
       <line x1="100" y1="140" x2="150" y2="115" stroke="#16a34a" strokeWidth="2.5" />
 
       {/* Leaves - different shapes for monocot/dicot variety */}
-      <g className={hl('leaves')}>
+      <g className={hl('leaves')} {...hlFilter('leaves')}>
         {/* Net-veined leaf (dicot) */}
         <ellipse cx="55" cy="155" rx="20" ry="10" fill="#4ade80" stroke="#16a34a" strokeWidth="1.5" transform="rotate(-30 55 155)" />
         <line x1="45" y1="155" x2="65" y2="155" stroke="#15803d" strokeWidth="0.8" transform="rotate(-30 55 155)" />
@@ -239,7 +276,7 @@ function AngioPlant({ highlight, size = 180 }) {
       </g>
 
       {/* Flower (花) at top */}
-      <g className={hl('flower')}>
+      <g className={hl('flower')} {...hlFilter('flower')}>
         {/* Petals */}
         {[0,72,144,216,288].map((angle,i) => {
           const rad = (angle * Math.PI) / 180;
@@ -258,50 +295,59 @@ function AngioPlant({ highlight, size = 180 }) {
       </g>
 
       {/* Fruit (果實) with seed inside */}
-      <g className={hl('fruit')}>
+      <g className={hl('fruit')} {...hlFilter('fruit')}>
         <ellipse cx="55" cy="90" rx="14" ry="11" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" />
         {/* Seed inside fruit */}
         <ellipse cx="55" cy="92" rx="5" ry="4" fill="#92400e" />
-        <text x="55" y="95" textAnchor="middle" fontSize="5" fill="#fef3c7" fontWeight="bold">&#x7A2E;</text>
+        <text x="55" y="95" textAnchor="middle" fontSize="7" fill="#fef3c7" fontWeight="bold">&#x7A2E;</text>
       </g>
 
       {/* Another fruit on right branch */}
-      <g className={hl('fruit')}>
+      <g className={hl('fruit')} {...hlFilter('fruit')}>
         <ellipse cx="150" cy="108" rx="12" ry="10" fill="#f87171" stroke="#dc2626" strokeWidth="1.5" />
         <ellipse cx="150" cy="110" rx="4" ry="3" fill="#92400e" />
       </g>
 
       {/* Labels */}
-      <text x="100" y="28" textAnchor="middle" fontSize="9" fill="#ec4899" fontWeight="bold">&#x82B1;</text>
-      <text x="30" y="88" fontSize="8" fill="#ea580c" fontWeight="bold">&#x679C;&#x5BE6;</text>
-      <text x="55" y="110" textAnchor="middle" fontSize="7" fill="#92400e" fontWeight="bold">&#x5305;&#x4F4F;&#x7A2E;&#x5B50;</text>
-      <text x="160" y="100" fontSize="7" fill="#dc2626" fontWeight="bold">&#x679C;&#x5BE6;</text>
+      <rect x="85" y="15" width="30" height="16" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="28" textAnchor="middle" fontSize="12" fill="#ec4899" fontWeight="bold">&#x82B1;</text>
+      <rect x="15" y="76" width="44" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="37" y="88" textAnchor="middle" fontSize="11" fill="#ea580c" fontWeight="bold">&#x679C;&#x5BE6;</text>
+      <rect x="22" y="98" width="66" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="55" y="110" textAnchor="middle" fontSize="10" fill="#92400e" fontWeight="bold">&#x5305;&#x4F4F;&#x7A2E;&#x5B50;</text>
+      <rect x="155" y="88" width="44" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="177" y="100" textAnchor="middle" fontSize="10" fill="#dc2626" fontWeight="bold">&#x679C;&#x5BE6;</text>
     </svg>
   );
 }
 
 function MonocotVsDicot({ highlight, size = 200 }) {
   const hl = (part) => highlight === part ? 'animate-pulse' : '';
+  const hlFilter = (part) => highlight === part ? { filter: 'url(#glowMD)' } : {};
   return (
     <svg viewBox="0 0 400 280" width={size * 2} height={size * 1.4} className="drop-shadow-lg">
+      <defs>
+        <filter id="glowMD"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
       {/* Divider */}
       <line x1="200" y1="30" x2="200" y2="270" stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />
 
       {/* LEFT - Monocot (單子葉) */}
-      <text x="100" y="25" textAnchor="middle" fontSize="14" fill="#22c55e" fontWeight="bold">&#x55AE;&#x5B50;&#x8449;</text>
+      <text x="100" y="25" textAnchor="middle" fontSize="16" fill="#22c55e" fontWeight="bold">&#x55AE;&#x5B50;&#x8449;</text>
 
       {/* Monocot leaf - parallel veins */}
-      <g className={hl('leafVein')}>
+      <g className={hl('leafVein')} {...hlFilter('leafVein')}>
         <ellipse cx="60" cy="90" rx="30" ry="12" fill="#86efac" stroke="#16a34a" strokeWidth="1.5" transform="rotate(-10 60 90)" />
         {[-6,-3,0,3,6].map((dy,i) => (
           <line key={i} x1="35" y1={90+dy} x2="85" y2={90+dy} stroke="#15803d" strokeWidth="0.7"
             transform="rotate(-10 60 90)" />
         ))}
-        <text x="60" y="115" textAnchor="middle" fontSize="9" fill="#15803d" fontWeight="bold">&#x5E73;&#x884C;&#x8108;</text>
+        <rect x="30" y="103" width="60" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="60" y="115" textAnchor="middle" fontSize="12" fill="#15803d" fontWeight="bold">&#x5E73;&#x884C;&#x8108;</text>
       </g>
 
       {/* Monocot flower - 3 petals */}
-      <g className={hl('flowerParts')}>
+      <g className={hl('flowerParts')} {...hlFilter('flowerParts')}>
         {[0,120,240].map((angle,i) => {
           const rad = (angle * Math.PI) / 180;
           const cx = 150 + Math.cos(rad) * 14;
@@ -310,31 +356,34 @@ function MonocotVsDicot({ highlight, size = 200 }) {
             transform={`rotate(${angle} ${cx} ${cy})`} />;
         })}
         <circle cx="150" cy="80" r="5" fill="#fbbf24" />
-        <text x="150" y="105" textAnchor="middle" fontSize="9" fill="#a855f7" fontWeight="bold">3&#x7684;&#x500D;&#x6578;</text>
+        <rect x="114" y="93" width="72" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="150" y="105" textAnchor="middle" fontSize="12" fill="#a855f7" fontWeight="bold">3&#x7684;&#x500D;&#x6578;</text>
       </g>
 
       {/* Monocot stem cross-section - scattered vascular bundles */}
-      <g className={hl('stemStructure')}>
+      <g className={hl('stemStructure')} {...hlFilter('stemStructure')}>
         <circle cx="60" cy="185" r="30" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
         {[[45,175],[55,168],[70,172],[50,185],[65,180],[75,188],[48,198],[60,195],[72,200],[55,208],[65,178],[52,192]].map(([x,y],i) => (
           <circle key={i} cx={x} cy={y} r="3" fill="#15803d" />
         ))}
-        <text x="60" y="225" textAnchor="middle" fontSize="8" fill="#15803d" fontWeight="bold">&#x6563;&#x751F;</text>
+        <rect x="35" y="213" width="50" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="60" y="225" textAnchor="middle" fontSize="11" fill="#15803d" fontWeight="bold">&#x6563;&#x751F;</text>
       </g>
 
       {/* Monocot seed - 1 cotyledon */}
-      <g className={hl('seed')}>
+      <g className={hl('seed')} {...hlFilter('seed')}>
         <ellipse cx="150" cy="185" rx="18" ry="22" fill="#fef3c7" stroke="#d97706" strokeWidth="1.5" />
         <ellipse cx="150" cy="185" rx="10" ry="16" fill="#fbbf24" opacity="0.6" />
-        <text x="150" y="190" textAnchor="middle" fontSize="8" fill="#92400e" fontWeight="bold">1&#x7247;</text>
-        <text x="150" y="218" textAnchor="middle" fontSize="8" fill="#d97706" fontWeight="bold">&#x5B50;&#x8449;</text>
+        <text x="150" y="190" textAnchor="middle" fontSize="11" fill="#92400e" fontWeight="bold">1&#x7247;</text>
+        <rect x="125" y="206" width="50" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="150" y="218" textAnchor="middle" fontSize="11" fill="#d97706" fontWeight="bold">&#x5B50;&#x8449;</text>
       </g>
 
       {/* RIGHT - Dicot (雙子葉) */}
-      <text x="300" y="25" textAnchor="middle" fontSize="14" fill="#0ea5e9" fontWeight="bold">&#x96D9;&#x5B50;&#x8449;</text>
+      <text x="300" y="25" textAnchor="middle" fontSize="16" fill="#0ea5e9" fontWeight="bold">&#x96D9;&#x5B50;&#x8449;</text>
 
       {/* Dicot leaf - net veins */}
-      <g className={hl('leafVein')}>
+      <g className={hl('leafVein')} {...hlFilter('leafVein')}>
         <ellipse cx="260" cy="88" rx="28" ry="15" fill="#86efac" stroke="#16a34a" strokeWidth="1.5" transform="rotate(10 260 88)" />
         {/* Main vein */}
         <line x1="240" y1="88" x2="280" y2="88" stroke="#15803d" strokeWidth="1.2" transform="rotate(10 260 88)" />
@@ -343,11 +392,12 @@ function MonocotVsDicot({ highlight, size = 200 }) {
           <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#15803d" strokeWidth="0.6"
             transform="rotate(10 260 88)" />
         ))}
-        <text x="260" y="115" textAnchor="middle" fontSize="9" fill="#15803d" fontWeight="bold">&#x7DB2;&#x72C0;&#x8108;</text>
+        <rect x="230" y="103" width="60" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="260" y="115" textAnchor="middle" fontSize="12" fill="#15803d" fontWeight="bold">&#x7DB2;&#x72C0;&#x8108;</text>
       </g>
 
       {/* Dicot flower - 5 petals */}
-      <g className={hl('flowerParts')}>
+      <g className={hl('flowerParts')} {...hlFilter('flowerParts')}>
         {[0,72,144,216,288].map((angle,i) => {
           const rad = (angle * Math.PI) / 180;
           const cx = 350 + Math.cos(rad) * 14;
@@ -356,11 +406,12 @@ function MonocotVsDicot({ highlight, size = 200 }) {
             transform={`rotate(${angle} ${cx} ${cy})`} />;
         })}
         <circle cx="350" cy="80" r="5" fill="#fbbf24" />
-        <text x="350" y="105" textAnchor="middle" fontSize="9" fill="#f43f5e" fontWeight="bold">4&#x6216;5&#x7684;&#x500D;&#x6578;</text>
+        <rect x="300" y="93" width="100" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="350" y="105" textAnchor="middle" fontSize="12" fill="#f43f5e" fontWeight="bold">4&#x6216;5&#x7684;&#x500D;&#x6578;</text>
       </g>
 
       {/* Dicot stem cross-section - ring arrangement with cambium */}
-      <g className={hl('stemStructure')}>
+      <g className={hl('stemStructure')} {...hlFilter('stemStructure')}>
         <circle cx="260" cy="185" r="30" fill="#dbeafe" stroke="#0ea5e9" strokeWidth="2" />
         {/* Ring of vascular bundles */}
         {[0,45,90,135,180,225,270,315].map((angle,i) => {
@@ -369,24 +420,29 @@ function MonocotVsDicot({ highlight, size = 200 }) {
         })}
         {/* Cambium ring */}
         <circle cx="260" cy="185" r="18" fill="none" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="3,2" />
-        <text x="260" y="225" textAnchor="middle" fontSize="7" fill="#0369a1" fontWeight="bold">&#x74B0;&#x72C0;&#x6392;&#x5217;</text>
-        <text x="260" y="237" textAnchor="middle" fontSize="7" fill="#16a34a" fontWeight="bold">+&#x5F62;&#x6210;&#x5C64;</text>
+        <rect x="222" y="213" width="76" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="260" y="225" textAnchor="middle" fontSize="10" fill="#0369a1" fontWeight="bold">&#x74B0;&#x72C0;&#x6392;&#x5217;</text>
+        <rect x="226" y="225" width="68" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="260" y="237" textAnchor="middle" fontSize="10" fill="#16a34a" fontWeight="bold">+&#x5F62;&#x6210;&#x5C64;</text>
       </g>
 
       {/* Dicot seed - 2 cotyledons */}
-      <g className={hl('seed')}>
+      <g className={hl('seed')} {...hlFilter('seed')}>
         <ellipse cx="350" cy="185" rx="18" ry="22" fill="#fef3c7" stroke="#d97706" strokeWidth="1.5" />
         <line x1="350" y1="165" x2="350" y2="205" stroke="#d97706" strokeWidth="1.5" />
         <ellipse cx="343" cy="185" rx="6" ry="14" fill="#fbbf24" opacity="0.6" />
         <ellipse cx="357" cy="185" rx="6" ry="14" fill="#fbbf24" opacity="0.6" />
-        <text x="350" y="190" textAnchor="middle" fontSize="8" fill="#92400e" fontWeight="bold">2&#x7247;</text>
-        <text x="350" y="218" textAnchor="middle" fontSize="8" fill="#d97706" fontWeight="bold">&#x5B50;&#x8449;</text>
+        <text x="350" y="190" textAnchor="middle" fontSize="11" fill="#92400e" fontWeight="bold">2&#x7247;</text>
+        <rect x="325" y="206" width="50" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+        <text x="350" y="218" textAnchor="middle" fontSize="11" fill="#d97706" fontWeight="bold">&#x5B50;&#x8449;</text>
       </g>
 
       {/* Monocot examples */}
-      <text x="100" y="265" textAnchor="middle" fontSize="8" fill="#64748b">&#x7A3B;&#x7C73;&#x3001;&#x7389;&#x7C73;&#x3001;&#x767E;&#x5408;</text>
+      <rect x="40" y="253" width="120" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="100" y="265" textAnchor="middle" fontSize="11" fill="#64748b" fontWeight="bold">&#x7A3B;&#x7C73;&#x3001;&#x7389;&#x7C73;&#x3001;&#x767E;&#x5408;</text>
       {/* Dicot examples */}
-      <text x="300" y="265" textAnchor="middle" fontSize="8" fill="#64748b">&#x73AB;&#x7470;&#x3001;&#x5411;&#x65E5;&#x8475;&#x3001;&#x860B;&#x679C;</text>
+      <rect x="230" y="253" width="140" height="15" rx="3" fill="rgba(255,255,255,0.8)"/>
+      <text x="300" y="265" textAnchor="middle" fontSize="11" fill="#64748b" fontWeight="bold">&#x73AB;&#x7470;&#x3001;&#x5411;&#x65E5;&#x8475;&#x3001;&#x860B;&#x679C;</text>
     </svg>
   );
 }
@@ -578,12 +634,12 @@ export default function PlantIllustrationExplore({ content, onComplete }) {
             {isCompareTab ? (
               <MonocotVsDicot
                 highlight={activeFeature?.highlightPart}
-                size={180}
+                size={210}
               />
             ) : (
               <currentPlant.Component
                 highlight={activeFeature?.highlightPart}
-                size={200}
+                size={230}
               />
             )}
           </div>
