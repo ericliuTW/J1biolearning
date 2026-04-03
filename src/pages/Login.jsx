@@ -122,7 +122,7 @@ export default function Login({ onLogin }) {
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🧬</div>
           <h1 className="text-3xl font-black text-primary-800 mb-2">
-            國一生物自主學習
+            J14國一自然預習平台
           </h1>
           <p className="text-gray-500 text-lg">開始你的探索之旅吧！</p>
         </div>

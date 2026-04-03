@@ -37,7 +37,7 @@ export default function UnitSelect({ student, onLogout }) {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-primary-800">🧬 國一生物自主學習</h1>
+            <h1 className="text-xl font-bold text-primary-800">🧬 J14國一自然預習平台</h1>
             <p className="text-sm text-gray-500">
               {student.班級} {student.座號}號 {student.姓名}
             </p>
