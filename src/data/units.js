@@ -386,7 +386,7 @@ export const units = [
       {
         id: 'concept4',
         title: '生物演化的趨勢與環境',
-        interactionType: 'evolutionMatchGame',
+        interactionType: 'evolutionMatch',
         content: {
           title: '演化的方向',
           trends: [
